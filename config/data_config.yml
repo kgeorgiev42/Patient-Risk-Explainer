@@ -1,0 +1,7 @@
+data:
+  mimic:
+    version: 1.0
+    format: 'npy'
+    preprocessed: 'True'
+    path: 's3://prme-main/data/binaries'
+    download_path: './models/binaries'

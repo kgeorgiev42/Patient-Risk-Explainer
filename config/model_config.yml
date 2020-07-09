@@ -1,0 +1,40 @@
+explainers:
+  tokenizer_path: 's3://prme-main/data/pickles/tokenizer.pickle'
+  tokenizer_local_path: './data/pickles/tokenizer.pickle'
+  task:
+    name: 'Risk of death'
+    class_names:
+      - 'Not Likely To Die'
+      - 'Likely To Die'
+
+  fasttext:
+    model_name: 'fasttext_def_v2'
+    version: 2.0
+    path: 's3://prme-main/models/fasttext_def_v2'
+    risk_path: 's3://prme-main/data/pickles/fasttext_risk.pickle'
+    download_path: './models/fasttext_def_v2'
+    risk_local_path: './data/pickles/fasttext_risk.pickle'
+
+  1d_cnn:
+    model_name: '1d_cnn_def_v2'
+    version: 2.0
+    path: 's3://prme-main/models/1d_cnn_def_v2'
+    risk_path: 's3://prme-main/data/pickles/1d_cnn_risk.pickle'
+    download_path: './models/1d_cnn_def_v2'
+    risk_local_path: './data/pickles/1d_cnn_risk.pickle'
+
+  bert:
+    model_name: 'bert_opt_w'
+    version: 1.0
+    path: 's3://prme-main/models/bert_opt_w.h5'
+    risk_path: 's3://prme-main/data/pickles/bert_risk.pickle'
+    risk_local_path: './data/pickles/bert_risk.pickle'
+    download_path: './models/bert_full'
+    download_pretrained_path: './models/bert_pretrain_output_all_notes_150000'
+    pretrained_model: 'bert_pretrain_output_all_notes_150000'
+    pretrained_path: 's3://prme-main/models/bert_pretrain_output_all_notes_150000'
+
+
+
+
+

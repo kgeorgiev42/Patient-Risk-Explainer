@@ -1,0 +1,214 @@
+Raw_Text,Text,Confidence,Risk,Pred_label,Exp_seq_map,Explanations,N_features,Sample_size,Letter_Length,Pos_ratio,Neg_ratio,Sum_pos,Sum_neg,Top_exp,Top_sent_length,Mean_exp_score,Text_Split,S_Word_Dict,S_Ranks,S_Top_Pos_Ranks,S_Top_Neg_Ranks,Top_Pos_Sent_length,Top_Neg_Sent_length,Top_Pos_Sent_Score_Sum,Top_Neg_Sent_Score_Sum,Mean_Rank_Sent_Score,Mean_Rank_Word_Score
+"Admission Date:  [**2162-3-1**]              Discharge Date:   [**2162-3-5**]
+
+Date of Birth:  [**2079-8-1**]             Sex:   M
+
+Service: NEUROSURGERY
+
+Allergies:
+Patient recorded as having No Known Allergies to Drugs
+
+Attending:[**First Name3 (LF) 78**]
+Chief Complaint:
+Headache
+
+Major Surgical or Invasive Procedure:
+none
+
+
+History of Present Illness:
+ c/o severe headache with subsequent visual changes, went
+to OSH, CT showed large left occipitoparietal hemmorrhage. Pt
+began to have right weakness, was intubated and transferred to
+[**Hospital1 18**] ED for further evaluation and treatment.
+
+
+Past Medical History:
+BPH, thyroid disease,
+Hypothyroidism
+CAD
+PPM ([**Company 1543**]) 08 for AV block
+BPH
+s/p colostomy and reversal in 05 for a sigmoid volvulus
+Meniere's (recurrent episodes of dizziness, not known to have
+falls)
+IBS
+Osteoporosis
+recent MMSE 26/30 ---> executive dysfunction in cognitive
+testing
+
+
+Social History:
+lives independently, retired executive, currently
+writing a book
+
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Mental status: intubated, ventilated
+Versed given at 6 am (2 mg), examined at 7 am, and again at 7:10
+
+am.
+
+Cranial nerves
+Right pupil reactive 2.5--->2 mm, left pupil unreactive. Corneal
+
+present in the right eye weakly. No nasal tickle. No doll's
+head.
+Weak gag (suction tubing)
+
+Motor
+Does not withdraw to noxious stimuli throughout. Tone slightly
+increased in the right arm. Reflexes brisker on the right (+2)
+than on the left 2, plantars mute.
+
+Imaging
+CT head scan described above.
+
+Upon discharge:
+
+Awake, alert, mumbling words.
+Pupils 3 to 2mm bil
+Moves Left spontaniously
+Right upper extremity plegic
+Right lower withdraws to pain
+
+Pt. being fed via feeding tube
+
+Pertinent Results:
+CT head on admit:
+
+IMPRESSION:
+1. Large left parieto-occipital intraparenchymal hematoma with
+subdural and subarachnoid hemorrhage as described above.
+2. Approximately 1 cm subfalcine herniation appears to be
+unchanged since the prior study; however, direct comparison is
+limited in the absence of outside hospital study scanned into
+PACS at the time of this dictation.
+
+NOTE ADDED AT ATTENDING REVIEW: I agree with the interpretation
+of the [**Hospital1 18**] study. However, the outside images are not
+available for review at this time, so I cannot determine whether
+there have been changes in the interval. The study and the
+report were reviewed by the staff radiologist.
+
+CTA:
+IMPRESSION:
+1. Large left parieto-occipital hemorrhage with surrounding
+edema. While
+this appearance is not definitive, likely etiologies include a
+hemorrhagic
+infarct. Less likely consideration would be amyloid angiopathy.
+2. Small left subdural hematoma with associated right shift of
+normal midline structures.
+3. Unremarkable post-contrast angiogram images with no evidence
+of arterial or venous filling defects.
+
+
+Brief Hospital Course:
+Mr [**Known lastname 7143**] was admitted to the TSICU was started on Mannitol and
+his BP<140. He began to localize his left arm and withdraw his
+legs. His respiratory status improved and family made the
+decision to have him extubated and chaged his Code status to
+DNR/DNI.
+
+He presented with hyponatremia and was undergoing ongoing
+replacement therapy. He also had a CTA performed that was
+negative for possible aneurysm or AVM as the source of the
+bleed.
+
+Given patient's pre-hospital status and level of functioning and
+previously expressed desires for care, after a family meeting
+with the neurosurgery and neurology service the family decided
+to not esculate care and continue with supportive care only.
+
+Medications on Admission:
+Levox 88 mcg
+Florinef 0.1 mg
+Finasteride 5 mg
+UroXatral one per day
+ASA 81 mg daily
+
+Allergies: NKDA
+
+Discharge Medications:
+1. Bisacodyl 5 mg Tablet, Delayed Release (E.C.) Sig: Two (2)
+Tablet, Delayed Release (E.C.) PO DAILY (Daily) as needed.
+2. Docusate Sodium 50 mg/5 mL Liquid Sig: Five (5) ml PO BID (2
+times a day).
+3. Fludrocortisone 0.1 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+4. Finasteride 5 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+
+5. Acetaminophen 325 mg Tablet Sig: 1-2 Tablets PO Q6H (every 6
+hours) as needed.
+6. Heparin (Porcine) 5,000 unit/mL Solution Sig: One (1) ml
+Injection TID (3 times a day).
+7. Nicardipine 30 mg Capsule Sig: Two (2) Capsule PO Q8H (every
+8 hours).
+8. Levothyroxine 88 mcg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+9. Ranitidine HCl 150 mg Tablet Sig: 0.5 Tablet PO BID (2 times
+a day).
+10. Ondansetron HCl (PF) 4 mg/2 mL Solution Sig: Two (2) ml
+Injection Q8H (every 8 hours) as needed.
+11. Metoprolol Tartrate 5 mg/5 mL Solution Sig: Five (5) ml
+Intravenous Q3H (every 3 hours) as needed for HR > 100.
+12. Dilaudid 1 mg/mL Solution Sig: 0.5-1 ml Injection every four
+(4) hours as needed for pain.
+
+
+Discharge Disposition:
+Extended Care
+
+Facility:
+[**Hospital3 10310**] Hospital
+
+Discharge Diagnosis:
+Large left parietoccipital hemorrhage measuring
+Protien/calorie malnutrition
+Dysphagia
+Altered mental status
+Right sided hemiparesis
+
+
+Discharge Condition:
+stable
+
+
+Discharge Instructions:
+??????	Take your pain medicine as prescribed.
+??????	Exercise should be limited to walking; no lifting, straining,
+or excessive bending.
+??????	Increase your intake of fluids and fiber, as narcotic pain
+medicine can cause constipation. We generally recommend taking
+an over the counter stool softener, such as Docusate (Colace)
+while taking narcotic pain medication.
+??????	Unless directed by your doctor, do not take any
+anti-inflammatory medicines such as Motrin, Aspirin, Advil, or
+Ibuprofen etc.
+
+CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE
+FOLLOWING
+
+??????	New onset of tremors or seizures.
+??????	Any confusion, lethargy or change in mental status.
+??????	Any numbness, tingling, weakness in your extremities.
+??????	Pain or headache that is continually increasing, or not
+relieved by pain medication.
+??????	New onset of the loss of function, or decrease of function on
+one whole side of your body.
+
+
+Followup Instructions:
+Follow up with Dr [**First Name (STitle) **] as needed, and call our office with any
+concerns or questions : [**Numeric Identifier 15826**]
+
+Dr. [**First Name (STitle) **] is the Neurologist that saw you in hospital as well.
+Please follow up with him as needed as well, his office # is :
+
+
+
+Completed by:[**2162-3-5**]",Corneal present in the right eye weakly . No nasal tickle . No dolls head . Weak gag suction tubing Motor Does not withdraw to noxious stimuli throughout . Tone slightly increased in the right arm . Imaging CT head scan described above . Upon discharge Awake alert mumbling words . Large left parieto occipital intraparenchymal hematoma with subdural and subarachnoid hemorrhage as described above . However the outside images are not available for review at this time so I can not determine whether there have been changes in the interval . The study and the report were reviewed by the staff radiologist . Large left parieto occipital hemorrhage with surrounding edema . While this appearance is not definitive likely etiologies include a hemorrhagic infarct . Less likely consideration would be amyloid angiopathy . Small left subdural hematoma with associated right shift of normal midline structures . Unremarkable post contrast angiogram images with no evidence of arterial or venous filling defects . He began to localize his left arm and withdraw his legs . His respiratory status improved and family made the decision to have him extubated and chaged his Code status to DNR DNI . He presented with hyponatremia and was undergoing ongoing replacement therapy . He also had a CTA performed that was negative for possible aneurysm or AVM as the source of the bleed . Given patients pre hospital status and level of functioning and previously expressed desires for care after a family meeting with the neurosurgery and neurology service the family decided to not esculate care and continue with supportive care only . PO DAILY Daily as needed . Exercise should be limited to walking no lifting straining or excessive bending . Increase your intake of fluids and fiber as narcotic pain medicine can cause constipation . We generally recommend taking an over the counter stool softener such as Docusate Colace while taking narcotic pain medication . Unless directed by your doctor do not take any anti inflammatory medicines such as Motrin Aspirin Advil or Ibuprofen etc . CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE FOLLOWING New onset of tremors or seizures . Any confusion lethargy or change in mental status . Any numbness tingling weakness in your extremities . Pain or headache that is continually increasing or not relieved by pain medication . New onset of the loss of function or decrease of function on one whole side of your body .,0.37123308,8,Not Likely To Die,"[(19, 0.024973345336008545), (17, 0.011245235148768124), (20, 0.010413487177368941), (6, -0.00943159543489848), (0, -0.009009121615892403), (18, -0.008711618481126152), (1, -0.00851649390668382), (12, 0.008237356768009584), (10, 0.007992095883525053), (11, 0.0077845698196453315), (8, 0.007578438790298142), (25, -0.00726663611860319), (23, 0.006211130054480164), (5, 0.005645380437662385), (13, -0.00460566865275584), (16, 0.00410332142549881), (24, -0.004017428199223776), (22, 0.002861723784952894), (3, -0.0013867552296882512), (21, -0.0011957948829078486)]","[('Given patients pre hospital status and level of functioning and previously expressed desires for care after a family meeting with the neurosurgery and neurology service the family decided to not esculate care and continue with supportive care only .', 0.024973345336008545), ('He presented with hyponatremia and was undergoing ongoing replacement therapy .', 0.011245235148768124), ('PO DAILY Daily as needed .', 0.010413487177368941), ('Upon discharge Awake alert mumbling words .', -0.00943159543489848), ('Corneal present in the right eye weakly .', -0.009009121615892403), ('He also had a CTA performed that was negative for possible aneurysm or AVM as the source of the bleed .', -0.008711618481126152), ('No nasal tickle .', -0.00851649390668382), ('Less likely consideration would be amyloid angiopathy .', 0.008237356768009584), ('Large left parieto occipital hemorrhage with surrounding edema .', 0.007992095883525053), ('While this appearance is not definitive likely etiologies include a hemorrhagic infarct .', 0.0077845698196453315), ('However the outside images are not available for review at this time so I can not determine whether there have been changes in the interval .', 0.007578438790298142), ('CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE FOLLOWING New onset of tremors or seizures .', -0.00726663611860319), ('We generally recommend taking an over the counter stool softener such as Docusate Colace while taking narcotic pain medication .', 0.006211130054480164), ('Imaging CT head scan described above .', 0.005645380437662385), ('Small left subdural hematoma with associated right shift of normal midline structures .', -0.00460566865275584), ('His respiratory status improved and family made the decision to have him extubated and chaged his Code status to DNR DNI .', 0.00410332142549881), ('Unless directed by your doctor do not take any anti inflammatory medicines such as Motrin Aspirin Advil or Ibuprofen etc .', -0.004017428199223776), ('Increase your intake of fluids and fiber as narcotic pain medicine can cause constipation .', 0.002861723784952894), ('Weak gag suction tubing Motor Does not withdraw to noxious stimuli throughout .', -0.0013867552296882512), ('Exercise should be limited to walking no lifting straining or excessive bending .', -0.0011957948829078486)]",20.0,5000.0,2460,0.55,0.45,0.09704608462621797,-0.05414111252177976,0.024973345336008545,249,0.04290497210443821,"['Corneal present in the right eye weakly .', 'No nasal tickle .', 'No dolls head .', 'Weak gag suction tubing Motor Does not withdraw to noxious stimuli throughout .', 'Tone slightly increased in the right arm .', 'Imaging CT head scan described above .', 'Upon discharge Awake alert mumbling words .', 'Large left parieto occipital intraparenchymal hematoma with subdural and subarachnoid hemorrhage as described above .', 'However the outside images are not available for review at this time so I can not determine whether there have been changes in the interval .', 'The study and the report were reviewed by the staff radiologist .', 'Large left parieto occipital hemorrhage with surrounding edema .', 'While this appearance is not definitive likely etiologies include a hemorrhagic infarct .', 'Less likely consideration would be amyloid angiopathy .', 'Small left subdural hematoma with associated right shift of normal midline structures .', 'Unremarkable post contrast angiogram images with no evidence of arterial or venous filling defects .', 'He began to localize his left arm and withdraw his legs .', 'His respiratory status improved and family made the decision to have him extubated and chaged his Code status to DNR DNI .', 'He presented with hyponatremia and was undergoing ongoing replacement therapy .', 'He also had a CTA performed that was negative for possible aneurysm or AVM as the source of the bleed .', 'Given patients pre hospital status and level of functioning and previously expressed desires for care after a family meeting with the neurosurgery and neurology service the family decided to not esculate care and continue with supportive care only .', 'PO DAILY Daily as needed .', 'Exercise should be limited to walking no lifting straining or excessive bending .', 'Increase your intake of fluids and fiber as narcotic pain medicine can cause constipation .', 'We generally recommend taking an over the counter stool softener such as Docusate Colace while taking narcotic pain medication .', 'Unless directed by your doctor do not take any anti inflammatory medicines such as Motrin Aspirin Advil or Ibuprofen etc .', 'CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE FOLLOWING New onset of tremors or seizures .', 'Any confusion lethargy or change in mental status .', 'Any numbness tingling weakness in your extremities .', 'Pain or headache that is continually increasing or not relieved by pain medication .', 'New onset of the loss of function or decrease of function on one whole side of your body .']","{'discharge': -1.6230721539463104, 'admission': -1.5192509299894468, 'pain': 0.9248041831083849, 'history': 0.8894373771536779, 'daily': 0.8297877099077497, 'namepattern': 0.6326207509714172, 'normal': 0.32867314461944624, 'patient': -0.46300008182491903}","{'Corneal present in the right eye weakly .': 0.0, 'No nasal tickle .': 0.0, 'No dolls head .': 0.0, 'Weak gag suction tubing Motor Does not withdraw to noxious stimuli throughout .': 0.0, 'Tone slightly increased in the right arm .': 0.0, 'Imaging CT head scan described above .': 0.0, 'Upon discharge Awake alert mumbling words .': -1.6230721539463104, 'Large left parieto occipital intraparenchymal hematoma with subdural and subarachnoid hemorrhage as described above .': 0.0, 'However the outside images are not available for review at this time so I can not determine whether there have been changes in the interval .': 0.0, 'The study and the report were reviewed by the staff radiologist .': 0.0, 'Large left parieto occipital hemorrhage with surrounding edema .': 0.0, 'While this appearance is not definitive likely etiologies include a hemorrhagic infarct .': 0.0, 'Less likely consideration would be amyloid angiopathy .': 0.0, 'Small left subdural hematoma with associated right shift of normal midline structures .': 0.32867314461944624, 'Unremarkable post contrast angiogram images with no evidence of arterial or venous filling defects .': 0.0, 'He began to localize his left arm and withdraw his legs .': 0.0, 'His respiratory status improved and family made the decision to have him extubated and chaged his Code status to DNR DNI .': 0.0, 'He presented with hyponatremia and was undergoing ongoing replacement therapy .': 0.0, 'He also had a CTA performed that was negative for possible aneurysm or AVM as the source of the bleed .': 0.0, 'Given patients pre hospital status and level of functioning and previously expressed desires for care after a family meeting with the neurosurgery and neurology service the family decided to not esculate care and continue with supportive care only .': 0.0, 'PO DAILY Daily as needed .': 1.6595754198154995, 'Exercise should be limited to walking no lifting straining or excessive bending .': 0.0, 'Increase your intake of fluids and fiber as narcotic pain medicine can cause constipation .': 0.9248041831083849, 'We generally recommend taking an over the counter stool softener such as Docusate Colace while taking narcotic pain medication .': 0.9248041831083849, 'Unless directed by your doctor do not take any anti inflammatory medicines such as Motrin Aspirin Advil or Ibuprofen etc .': 0.0, 'CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE FOLLOWING New onset of tremors or seizures .': 0.0, 'Any confusion lethargy or change in mental status .': 0.0, 'Any numbness tingling weakness in your extremities .': 0.0, 'Pain or headache that is continually increasing or not relieved by pain medication .': 1.8496083662167697, 'New onset of the loss of function or decrease of function on one whole side of your body .': 0.0}","OrderedDict([('Pain or headache that is continually increasing or not relieved by pain medication .', 1.8496083662167697), ('PO DAILY Daily as needed .', 1.6595754198154995), ('Increase your intake of fluids and fiber as narcotic pain medicine can cause constipation .', 0.9248041831083849), ('We generally recommend taking an over the counter stool softener such as Docusate Colace while taking narcotic pain medication .', 0.9248041831083849), ('Small left subdural hematoma with associated right shift of normal midline structures .', 0.32867314461944624)])","OrderedDict([('Upon discharge Awake alert mumbling words .', -1.6230721539463104), ('Corneal present in the right eye weakly .', 0.0), ('No nasal tickle .', 0.0), ('No dolls head .', 0.0), ('Weak gag suction tubing Motor Does not withdraw to noxious stimuli throughout .', 0.0)])",416,195,5.687465296868486,-1.6230721539463104,4.0643931429221745,-2.7755575615628914e-16

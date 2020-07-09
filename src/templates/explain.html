@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+
+{% block explain %}
+
+<div class="container-fluid">
+    <div class="section-header">
+        <h3 class="section-title">Explainer statistics</h3>
+        <span class="section-divider"></span>
+        <p class="section-description">
+            Information about the predictions.
+        </p>
+    </div>
+    <div class="row">
+        <div class="table-responsive col-lg-6">
+            <table class="table">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col"><b>Metrics</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Patient risk score:</th>
+                        <td class="text-center">{{session['risk_score']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Mean explanation score:</th>
+                        <td class="text-center">{{session['m_exp_score']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Mean sentence ranking score:</th>
+                        <td class="text-center">{{session['m_sent_r_score']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Style weight:</th>
+                        <td class="text-center">{{session['style_weight']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Learning rate:</th>
+                        <td class="text-center">{{session['lr']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Beta:</th>
+                        <td class="text-center">{{session['beta1']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Epsilon:</th>
+                        <td class="text-center">{{session['epsilon']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive col-lg-6">
+            <table class="table">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col"><b>Model performance</b></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Total time:</th>
+                        <td class="text-center">{{session['total_time']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Total loss:</th>
+                        <td class="text-center">{{session['total_loss'][1:-1]}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Style loss:</th>
+                        <td class="text-center">{{session['style_loss'][1:-1]}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Content loss:</th>
+                        <td class="text-center">{{session['content_loss'][1:-1]}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Generated image width:</th>
+                        <td class="text-center">{{session['gen_image_width']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Generated image height:</th>
+                        <td class="text-center">{{session['gen_image_height']}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,143 @@
+{% extends "layout.html" %}
+
+{% block index %}
+
+<div class="container">
+    <div class="row">
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+     <form action="" method="post" role="form" id="upload-form" enctype="multipart/form-data">
+         <div class="row">
+                <div class="form-group col-md-3 text-center">
+                    <h6>Select pre-trained model:</h6>
+                    <div class="btn-group">
+                        <select name="model-select" class="custom-select custom-select-sm">
+                            <option value="Fasttext" selected>Fasttext (faster but less precise)</option>
+                            <option value="1D-CNN">1D-CNN (slower but more precise)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 text-center">
+                    <h6>Select task to perform:</h6>
+                    <div class="btn-group">
+                        <select name="task-select" class="custom-select custom-select-sm">
+                            <option value="Fasttext" selected>Risk of death estimation (1yr)</option>
+                            <option value="1D-CNN">Risk of hospital readmission (1yr)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 text-center">
+                    <h6>Select decision threshold (for model sensitivity tuning):</h6>
+
+                    <div class="btn-group">
+                        <select name="threshold-select" class="custom-select custom-select-sm">
+                            <option value="Default" selected>Default</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <p class="small" style="margin-top: 20px">(Default values: Fasttext - 8, 1D-CNN - 10)</p>
+                </div>
+            </div>
+
+
+        <div class="row">
+            <div class="container-fluid">
+                <h5 class="text-center">Upload letter to explain:</h5>
+            </div>
+            <div class="col-lg-12 content wow fadeInLeft">
+                <div class="container-fluid">
+                    <div class="form-row">
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="upload_file"
+                              aria-describedby="upload_button">
+                            <label id="custom-file-label" class="custom-file-label" for="upload_file">Choose file (.txt file required)</label>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="form-row">
+                <div class="col-lg-1"></div>
+                <div class="form-group col-lg-10 text-center">
+                    <div id="val_message_cont"></div>
+                    <div class="md-form">
+                        <label for="md-form-text"></label>
+                        <textarea id="md-form-text" class="md-textarea form-control" rows="20" readonly>
+
+                        </textarea>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+
+
+            <div class="row">
+                <div class="content wow fadeInLeft col-md-6">
+                    <div class="cta-btn-container text-center">
+                        <button class="btn btn-outline btn-sm" id="explain" type="submit" style="background-color:aquamarine">
+                            Explain letter
+                        </button>
+                    </div>
+                </div>
+                <div class="content wow fadeInLeft col-md-6">
+                    <div class="cta-btn-container text-center">
+                        <button class="btn btn-outline btn-sm" id="clear" type="button" style="background-color:rosybrown">
+                            Clear results
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container text-center">
+                    <h4 class="err-mes" style="margin: 20px auto; color:darkorange">{{message}}</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <h6 style="display: block; margin: 20px auto;">
+                    Warning: This may take a few minutes to process.
+                </h6>
+            </div>
+
+            <div class="text-center" style="margin-top:10px; margin-bottom:10px;">
+                {% for message in get_flashed_messages() %}
+                {{ message }}
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <p id="load_text" style="display: block; margin: auto; visibility: hidden;">Loading...</p>
+            </div>
+
+            <div class="row">
+                <div id="load_bar" class="spinner-grow text-info row-cols-md-12" style="margin: 20px auto; width: 35px; visibility: hidden;" role="status">
+                  <span class="sr-only text-center">Loading...</span>
+                </div>
+            </div>
+
+     </form>
+
+</div>
+
+{% block explain %}{% endblock %}
+
+
+
+{% endblock %}
