@@ -65,3 +65,4 @@ ENV/
 /models/ft_supervised_opt.bin
 /models/ft_supervised_vectors_def.txt
 /models/ft_unsupervised_vectors.txt
+/data/
