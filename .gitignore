@@ -1,6 +1,7 @@
 # environment
 prme/
-../patient-risk-model-explainer-xai/data/
+data/
+models/
 resources/
 
 # Byte-compiled / optimized / DLL files
