@@ -3,19 +3,26 @@
 {% block explain %}
 
 <div class="container-fluid">
-    <div class="section-header">
-        <h3 class="section-title">Explainer statistics</h3>
-        <span class="section-divider"></span>
-        <p class="section-description">
-            Information about the predictions.
-        </p>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <div class="section-header text-center">
+                <h3 class="section-title">Explainer statistics</h3>
+                <span class="section-divider"></span>
+                <p class="section-description">
+                    Information about the predictions.
+                </p>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
     </div>
     <div class="row">
-        <div class="table-responsive col-lg-6">
+        <div class="col-lg-2"></div>
+        <div class="table-responsive col-lg-8">
             <table class="table">
                 <thead class="text-center">
                     <tr>
-                        <th scope="col"><b>Metrics</b></th>
+                        <th scope="col" colspan="2"><b>Predictions</b></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,6 +30,29 @@
                         <th scope="row">Patient risk score:</th>
                         <td class="text-center">{{session['risk_score']}}</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Patient risk percentage:</th>
+                        <td class="text-center">{{session['risk_per']}}%</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Model confidence:</th>
+                        <td class="text-center">{{session['risk_conf']}}%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="table-responsive col-lg-8">
+            <table class="table">
+                <thead class="text-center">
+                    <tr>
+                        <th scope="col" colspan="2"><b>Explainer metrics</b></th>
+                    </tr>
+                </thead>
+                <tbody>
                     <tr>
                         <th scope="row">Mean explanation score:</th>
                         <td class="text-center">{{session['m_exp_score']}}</td>
@@ -32,59 +62,71 @@
                         <td class="text-center">{{session['m_sent_r_score']}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Style weight:</th>
-                        <td class="text-center">{{session['style_weight']}}</td>
+                        <th scope="row">Top positive explanation:</th>
+                        <td class="text-center">{{session['t_pos_exp']}}<br>Score({{session['t_pos_exp_s']}})</td>
                     </tr>
                     <tr>
-                        <th scope="row">Learning rate:</th>
-                        <td class="text-center">{{session['lr']}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Beta:</th>
-                        <td class="text-center">{{session['beta1']}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Epsilon:</th>
-                        <td class="text-center">{{session['epsilon']}}</td>
+                        <th scope="row">Top negative explanation:</th>
+                        <td class="text-center">{{session['t_neg_exp']}}<br>Score({{session['t_neg_exp_s']}})</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="table-responsive col-lg-6">
+        <div class="col-lg-2"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2"></div>
+        <div class="table-responsive col-lg-8">
             <table class="table">
                 <thead class="text-center">
                     <tr>
-                        <th scope="col"><b>Model performance</b></th>
+                        <th scope="col" colspan="3"><b>Sentence Ranking metrics</b></th>
+                    </tr>
+                    <tr>
+                        <th scope="col"></th>
+                        <th scope="col"><b>Top 5 positive ranking sentences</b></th>
+                        <th scope="col"><b>Top 5 negative ranking sentences</b></th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th scope="row">Total time:</th>
-                        <td class="text-center">{{session['total_time']}}</td>
+                        <th scope="row">1</th>
+                        <td class="text-center">{{session['t_pos_sent_exp_keys'][0]}}<br>Score({{session['t_pos_sent_exp_vals'][0]}})</td>
+                        <td class="text-center">{{session['t_neg_sent_exp_keys'][0]}}<br>Score({{session['t_neg_sent_exp_vals'][0]}})</td>
                     </tr>
                     <tr>
-                        <th scope="row">Total loss:</th>
-                        <td class="text-center">{{session['total_loss'][1:-1]}}</td>
+                        <th scope="row">2</th>
+                        <td class="text-center">{{session['t_pos_sent_exp_keys'][1]}}<br>Score({{session['t_pos_sent_exp_vals'][1]}})</td>
+                        <td class="text-center">{{session['t_neg_sent_exp_keys'][1]}}<br>Score({{session['t_neg_sent_exp_vals'][1]}})</td>
                     </tr>
                     <tr>
-                        <th scope="row">Style loss:</th>
-                        <td class="text-center">{{session['style_loss'][1:-1]}}</td>
+                        <th scope="row">3</th>
+                        <td class="text-center">{{session['t_pos_sent_exp_keys'][2]}}<br>Score({{session['t_pos_sent_exp_vals'][2]}})</td>
+                        <td class="text-center">{{session['t_neg_sent_exp_keys'][2]}}<br>Score({{session['t_neg_sent_exp_vals'][2]}})</td>
                     </tr>
                     <tr>
-                        <th scope="row">Content loss:</th>
-                        <td class="text-center">{{session['content_loss'][1:-1]}}</td>
+                        <th scope="row">4</th>
+                        <td class="text-center">{{session['t_pos_sent_exp_keys'][3]}}<br>Score({{session['t_pos_sent_exp_vals'][3]}})</td>
+                        <td class="text-center">{{session['t_neg_sent_exp_keys'][3]}}<br>Score({{session['t_neg_sent_exp_vals'][3]}})</td>
                     </tr>
                     <tr>
-                        <th scope="row">Generated image width:</th>
-                        <td class="text-center">{{session['gen_image_width']}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Generated image height:</th>
-                        <td class="text-center">{{session['gen_image_height']}}</td>
+                        <th scope="row">5</th>
+                        <td class="text-center">{{session['t_pos_sent_exp_keys'][4]}}<br>Score({{session['t_pos_sent_exp_vals'][4]}})</td>
+                        <td class="text-center">{{session['t_neg_sent_exp_keys'][4]}}<br>Score({{session['t_neg_sent_exp_vals'][4]}})</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+        <div class="col-lg-2"></div>
     </div>
+</div>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function(){
+        $('#md-form-text').text({{session['raw_letter']}});
+    });
+</script>
 
 {% endblock %}

@@ -86,6 +86,7 @@
          $('#md-form-text').text('');
          $('#load_bar').css('visibility', 'hidden');
          $('#load_text').css('visibility', 'hidden');
+         window.location.href='/home';
      })
 
     $("#upload-form").submit(function (e) {
@@ -101,22 +102,21 @@
 
             // send ajax POST request to start background job
 
-            /*
             $.ajax({
                 data: form_data,
                 type: 'POST',
-                url: '/explain',
+                url: "/home",
                 contentType: false,
                 processData: false,
-                success: function (data, status, request) {
-                    console.log(data + "/" + status + "/" + request)
-                    status_url = request.getResponseHeader('Location');
+                success: function (response) {
+                    console.log(response)
+                    window.location.href = "/explain";
                 },
                 error: function () {
                     alert('Unexpected error starting the query.');
                 }
             });
-            */
+
         }
         });
 

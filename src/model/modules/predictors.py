@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from src.modules.explainers import BaseExplainer
+from src.model.modules.explainers import BaseExplainer
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tqdm import tqdm
 
@@ -30,16 +30,16 @@ class Predictor(BaseExplainer):
             pred_label = self.class_names[1] if risk_score == 10 else self.class_names[0]
             if labels is not None:
                 true_label = labels[i]
-                letter_dict[letters[i]] = (probs[i], risk_score, pred_label, self.class_names[true_label])
-            letter_dict[letters[i]] = (probs[i], risk_score, pred_label)
+                letter_dict[letters[i]] = (probs[i], risk_score, pred_label, self.class_names[true_label], self.risk_grps[risk_score - 1])
+            letter_dict[letters[i]] = (probs[i], risk_score, pred_label, self.risk_grps[risk_score - 1])
 
         return letter_dict
 
     def preds_to_df(self, pred_dict, raw_letter, true_label=None):
         val_df = pd.DataFrame(data=[pred_dict.keys(), pred_dict.values()]).T
         if true_label is not None:
-            values_df = pd.DataFrame(val_df[1].to_list(), columns=['Confidence', 'Risk', 'Pred_label', 'True_label'])
-        values_df = pd.DataFrame(val_df[1].to_list(), columns=['Confidence', 'Risk', 'Pred_label'])
+            values_df = pd.DataFrame(val_df[1].to_list(), columns=['Confidence', 'Risk', 'Pred_label', 'True_label', 'Risk_per'])
+        values_df = pd.DataFrame(val_df[1].to_list(), columns=['Confidence', 'Risk', 'Pred_label', 'Risk_per'])
         values_df['Confidence'] = [''.join(map(str, l)) for l in values_df['Confidence']]
         values_df.insert(0, 'Text', val_df[0])
         values_df.insert(0, 'Raw_Text', raw_letter)

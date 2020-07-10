@@ -21,8 +21,8 @@
                     <h6>Select pre-trained model:</h6>
                     <div class="btn-group">
                         <select name="model-select" class="custom-select custom-select-sm">
-                            <option value="Fasttext" selected>Fasttext (faster but less precise)</option>
-                            <option value="1D-CNN">1D-CNN (slower but more precise)</option>
+                            <option value="fasttext" selected>Fasttext (faster but less precise)</option>
+                            <option value="1d_cnn">1D-CNN (slower but more precise)</option>
                         </select>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                     <h6>Select task to perform:</h6>
                     <div class="btn-group">
                         <select name="task-select" class="custom-select custom-select-sm">
-                            <option value="Fasttext" selected>Risk of death estimation (1yr)</option>
-                            <option value="1D-CNN">Risk of hospital readmission (1yr)</option>
+                            <option value="Risk of death" selected>Risk of death estimation (1yr)</option>
+                            <option value="Risk of hospital readmission">Risk of hospital readmission (1yr)</option>
                         </select>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                     <div id="val_message_cont"></div>
                     <div class="md-form">
                         <label for="md-form-text"></label>
-                        <textarea id="md-form-text" class="md-textarea form-control" rows="20" readonly>
+                        <textarea id="md-form-text" name="md-form-text" class="md-textarea form-control" rows="20" readonly>
 
                         </textarea>
                     </div>
