@@ -1,6 +1,143 @@
-{% extends "index.html" %}
+{% extends "layout.html" %}
 
 {% block explain %}
+
+<style>
+
+</style>
+
+<div class="container">
+    <div class="row">
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+     <form action="" method="post" role="form" id="upload-form" enctype="multipart/form-data">
+         <div class="row">
+                <div class="form-group col-md-3 text-center">
+                    <h6>Select pre-trained model:</h6>
+                    <div class="btn-group">
+                        <select name="model-select" class="custom-select custom-select-sm">
+                            <option value="fasttext" selected>Fasttext (faster but less precise)</option>
+                            <option value="1d_cnn">1D-CNN (slower but more precise)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3 text-center">
+                    <h6>Select task to perform:</h6>
+                    <div class="btn-group">
+                        <select name="task-select" class="custom-select custom-select-sm">
+                            <option value="Risk of death" selected>Risk of death estimation (1yr)</option>
+                            <option value="Risk of hospital readmission">Risk of hospital readmission (1yr)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-6 text-center">
+                    <h6>Select decision threshold (for model sensitivity tuning):</h6>
+
+                    <div class="btn-group">
+                        <select name="threshold-select" class="custom-select custom-select-sm">
+                            <option value="Default" selected>Default</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                    <p class="small" style="margin-top: 20px">(Default values: Fasttext - 8, 1D-CNN - 10)</p>
+                </div>
+            </div>
+
+
+        <div class="row">
+            <div class="container-fluid">
+                <h5 class="text-center">Upload letter to explain:</h5>
+            </div>
+            <div class="col-lg-12 content wow fadeInLeft">
+                <div class="container-fluid">
+                    <div class="form-row">
+                        <div class="input-group">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="upload_file"
+                              aria-describedby="upload_button">
+                            <label id="custom-file-label" class="custom-file-label" for="upload_file">Choose file (.txt file required)</label>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="form-row">
+                <div class="col-lg-1"></div>
+                <div class="form-group col-lg-10 text-center">
+                    <div id="val_message_cont"></div>
+                    <div class="md-form">
+                        <div id="md-div" class="md-textarea form-control" style="overflow-y: scroll; height:800px; text-align: left; margin-top: 25px;" readonly>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
+
+
+            <div class="row">
+                <div class="content wow fadeInLeft col-md-6">
+                    <div class="cta-btn-container text-center">
+                        <button class="btn btn-outline btn-sm" id="explain" type="submit" style="background-color:aquamarine">
+                            Explain letter
+                        </button>
+                    </div>
+                </div>
+                <div class="content wow fadeInLeft col-md-6">
+                    <div class="cta-btn-container text-center">
+                        <button class="btn btn-outline btn-sm" id="clear" type="button" style="background-color:rosybrown">
+                            Clear results
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="container text-center">
+                    <h4 class="err-mes" style="margin: 20px auto; color:darkorange">{{message}}</h4>
+                </div>
+            </div>
+
+            <div class="row">
+                <h6 style="display: block; margin: 20px auto;">
+                    Warning: This may take a few minutes to process.
+                </h6>
+            </div>
+
+            <div class="text-center" style="margin-top:10px; margin-bottom:10px;">
+                {% for message in get_flashed_messages() %}
+                {{ message }}
+                {% endfor %}
+            </div>
+
+            <div class="row">
+                <p id="load_text" style="display: block; margin: auto; visibility: hidden;">Loading...</p>
+            </div>
+
+            <div class="row">
+                <div id="load_bar" class="spinner-grow text-info row-cols-md-12" style="margin: 20px auto; width: 35px; visibility: hidden;" role="status">
+                  <span class="sr-only text-center">Loading...</span>
+                </div>
+            </div>
+
+     </form>
+
+</div>
 
 <div class="container-fluid">
     <div class="row">
@@ -124,9 +261,131 @@
 </div>
 
 <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function(){
-        $('#md-form-text').text({{session['raw_letter']}});
-    });
+    function termFreqMap(str) {
+        var words = str.split(' ');
+        var termFreq = {};
+        words.forEach(function(w) {
+            termFreq[w] = (termFreq[w] || 0) + 1;
+        });
+        return termFreq;
+    }
+
+    function addKeysToDict(map, dict) {
+        for (var key in map) {
+            dict[key] = true;
+        }
+    }
+
+    function termFreqMapToVector(map, dict) {
+        var termFreqVector = [];
+        for (var term in dict) {
+            termFreqVector.push(map[term] || 0);
+        }
+        return termFreqVector;
+    }
+
+    function vecDotProduct(vecA, vecB) {
+        var product = 0;
+        for (var i = 0; i < vecA.length; i++) {
+            product += vecA[i] * vecB[i];
+        }
+        return product;
+    }
+
+    function vecMagnitude(vec) {
+        var sum = 0;
+        for (var i = 0; i < vec.length; i++) {
+            sum += vec[i] * vec[i];
+        }
+        return Math.sqrt(sum);
+    }
+
+    function cosineSimilarity(vecA, vecB) {
+        return vecDotProduct(vecA, vecB) / (vecMagnitude(vecA) * vecMagnitude(vecB));
+    }
+
+    Cosinesimilarity = function textCosineSimilarity(strA, strB) {
+        var termFreqA = termFreqMap(strA);
+        var termFreqB = termFreqMap(strB);
+
+        var dict = {};
+        addKeysToDict(termFreqA, dict);
+        addKeysToDict(termFreqB, dict);
+
+        var termFreqVecA = termFreqMapToVector(termFreqA, dict);
+        var termFreqVecB = termFreqMapToVector(termFreqB, dict);
+
+        return cosineSimilarity(termFreqVecA, termFreqVecB);
+    }
+
+
+
+    window.onload = function () {
+        // Determine selected options
+        var options = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "(", ")", "|"]
+            },
+            acrossElements: true,
+            degug: true
+        };
+
+        var pos_keywords = [];
+        var neg_keywords = [];
+
+        // $('#md-form-text').text(localStorage.getItem("raw_letter"));
+        to_rep = localStorage.getItem("raw_letter").replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;');
+
+        to_rep = to_rep.replace(/\n+/g, '\n');
+        to_rep = to_rep.replace(/\r+/g, '\r');
+
+        to_rep = to_rep.replace(/\r?\n/g, '<br/>');
+        $('#md-div').html(to_rep);
+
+        var explanations = "{{ session['explanations'] }}";
+        explanations = explanations.replace(/&#34;/g, '"');
+        explanations = JSON.parse(explanations);
+        var list_letter_sents = localStorage.getItem("raw_letter").split(".");
+
+        for (var exp in explanations) {
+            var max_sim = 0.0
+            best_sent = ""
+            for (var raw_sent in list_letter_sents) {
+                sim = Cosinesimilarity(explanations[exp][0], list_letter_sents[raw_sent]);
+                if(sim > max_sim) {
+                    max_sim = sim;
+                    best_sent = list_letter_sents[raw_sent];
+                }
+            }
+            if(explanations[exp][1] > 0.0) {
+                pos_keywords.push(best_sent)
+            }
+            else {
+                neg_keywords.push(best_sent)
+            }
+        }
+
+        // Remove previous marked elements and mark
+        // the new keyword inside the context
+        $("#md-form-text").unmark({
+          done: function() {
+            $("#md-form-text").mark(pos_keywords, options);
+          }
+        });
+
+        /*
+        $("#md-form-text").mark(best_sent, {
+                "wildcards": "enabled",
+                "acrossElements": false,
+                "separateWordSearch": false,
+                "diacritics": false,
+                "debug": true
+            });
+        */
+        console.log(explanations)
+    }
 </script>
 
 {% endblock %}

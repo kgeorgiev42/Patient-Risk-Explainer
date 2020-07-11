@@ -91,7 +91,7 @@ def home():
     session['t_neg_sent_exp_keys'] = [el[0] for el in full_df.iloc[0].S_Top_Neg_Ranks.items()]
     session['t_pos_sent_exp_vals'] = [round(el[1], 4) for el in full_df.iloc[0].S_Top_Pos_Ranks.items()]
     session['t_neg_sent_exp_vals'] = [round(el[1], 4) for el in full_df.iloc[0].S_Top_Neg_Ranks.items()]
-    session['explanations'] = full_df.iloc[0].Explanations
+    session['explanations'] = json.dumps([(el[0], el[1]) for el in full_df.iloc[0].Explanations])
     #session['raw_letter'] = full_df.iloc[0].Raw_Text
 
     return jsonify(list(session.items()))
