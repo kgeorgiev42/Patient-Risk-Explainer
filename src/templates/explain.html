@@ -260,6 +260,39 @@
     </div>
 </div>
 
+<style>
+    .neg_statement_1 {
+  background: rgba(39, 234, 137, 0.2);
+    }
+    .neg_statement_2 {
+  background: rgba(39, 234, 137, 0.4);
+    }
+    .neg_statement_3 {
+  background: rgba(39, 234, 137, 0.6);
+    }
+    .neg_statement_4 {
+  background: rgba(39, 234, 137, 0.8);
+    }
+    .neg_statement_5 {
+  background: rgba(39, 234, 137, 1);
+    }
+    .pos_statement_1 {
+  background: rgba(226, 71, 71, 0.2);
+    }
+    .pos_statement_2 {
+  background: rgba(226, 71, 71, 0.4);
+    }
+    .pos_statement_3 {
+  background: rgba(226, 71, 71, 0.6);
+    }
+    .pos_statement_4 {
+  background: rgba(226, 71, 71, 0.8);
+    }
+    .pos_statement_5 {
+  background: rgba(226, 71, 71, 1);
+    }
+</style>
+
 <script type="text/javascript">
     function termFreqMap(str) {
         var words = str.split(' ');
@@ -322,15 +355,137 @@
 
     window.onload = function () {
         // Determine selected options
-        var options = {
+        var options_pos_1 = {
             separateWordSearch: false,
             accuracy: {
                 "value": "exactly",
-                "limiters": [",", ".", "(", ")", "|"]
+                "limiters": [",", ".", "\n", "\r", " "]
             },
-            acrossElements: true,
-            degug: true
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "pos_statement_1",
+            caseSensitive: true
         };
+
+        var options_pos_2 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "pos_statement_2",
+            caseSensitive: true
+        };
+
+        var options_pos_3 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "pos_statement_3",
+            caseSensitive: true
+        };
+
+        var options_pos_4 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "pos_statement_4",
+            caseSensitive: true
+        };
+
+        var options_pos_5 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "pos_statement_5",
+            caseSensitive: true
+        };
+
+        var options_neg_1 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "neg_statement_1",
+            caseSensitive: true
+        };
+
+        var options_neg_2 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "neg_statement_2",
+            caseSensitive: true
+        };
+
+        var options_neg_3 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "neg_statement_3",
+            caseSensitive: true
+        };
+
+        var options_neg_4 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "neg_statement_4",
+            caseSensitive: true
+        };
+
+        var options_neg_5 = {
+            separateWordSearch: false,
+            accuracy: {
+                "value": "exactly",
+                "limiters": [",", ".", "\n", "\r", " "]
+            },
+            acrossElements: false,
+            debug: true,
+            diacritics: true,
+            className: "neg_statement_5",
+            caseSensitive: true
+        };
+
+
 
         var pos_keywords = [];
         var neg_keywords = [];
@@ -359,19 +514,95 @@
                     best_sent = list_letter_sents[raw_sent];
                 }
             }
+            var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+            best_sent = best_sent.replace(/\t/g, '<br/>')
+            if (format.test(best_sent[0])) {
+                best_sent = best_sent.substr(1);
+            }
+            best_sent = best_sent.trim()
             if(explanations[exp][1] > 0.0) {
-                pos_keywords.push(best_sent)
+                pos_keywords.push([best_sent.replace(/\r?\n/g, '<br/>'), explanations[exp][1]])
             }
             else {
-                neg_keywords.push(best_sent)
+                neg_keywords.push([best_sent.replace(/\r?\n/g, '<br/>'), explanations[exp][1]])
+            }
+        }
+
+        var pos_keywords_proc_1 = [];
+        var pos_keywords_proc_2 = [];
+        var pos_keywords_proc_3 = [];
+        var pos_keywords_proc_4 = [];
+        var pos_keywords_proc_5 = [];
+
+        var neg_keywords_proc_1 = [];
+        var neg_keywords_proc_2 = [];
+        var neg_keywords_proc_3 = [];
+        var neg_keywords_proc_4 = [];
+        var neg_keywords_proc_5 = [];
+
+        for (var sent in pos_keywords){
+            sent_list = pos_keywords[sent][0].split('<br/>');
+            for (var sent_split in sent_list){
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
+                    sent_split_split = sent_list[sent_split].split(" ")
+                    if (pos_keywords[sent][1] < 0.005) {
+                        pos_keywords_proc_1.push(sent_list[sent_split]);
+                    }
+                    else if (pos_keywords[sent][1] >= 0.005 && pos_keywords[sent][1] < 0.01) {
+                        pos_keywords_proc_2.push(sent_list[sent_split]);
+                    }
+                    else if (pos_keywords[sent][1] >= 0.01 && pos_keywords[sent][1] < 0.1) {
+                        pos_keywords_proc_3.push(sent_list[sent_split]);
+                    }
+                    else if (pos_keywords[sent][1] >= 0.1 && pos_keywords[sent][1] <= 0.2) {
+                        pos_keywords_proc_4.push(sent_list[sent_split]);
+                    }
+                    else {
+                        pos_keywords_proc_5.push(sent_list[sent_split]);
+                    }
+                }
+            }
+        }
+
+        for (var sent in neg_keywords){
+            sent_list = neg_keywords[sent][0].split('<br/>');
+            for (var sent_split in sent_list){
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
+                    sent_split_split = sent_list[sent_split].split(" ")
+                    if (neg_keywords[sent][1] > -0.005) {
+                        neg_keywords_proc_1.push(sent_list[sent_split]);
+                    }
+                    else if (neg_keywords[sent][1] <= -0.005 && neg_keywords[sent][1] > -0.01) {
+                        neg_keywords_proc_2.push(sent_list[sent_split]);
+                    }
+                    else if (neg_keywords[sent][1] <= -0.01 && neg_keywords[sent][1] > -0.1) {
+                        neg_keywords_proc_3.push(sent_list[sent_split]);
+                    }
+                    else if (neg_keywords[sent][1] <= -0.1 && neg_keywords[sent][1] >= -0.2) {
+                        neg_keywords_proc_4.push(sent_list[sent_split]);
+                    }
+                    else {
+                        neg_keywords_proc_5.push(sent_list[sent_split]);
+                    }
+                }
             }
         }
 
         // Remove previous marked elements and mark
         // the new keyword inside the context
-        $("#md-form-text").unmark({
+        $("#md-div").unmark({
           done: function() {
-            $("#md-form-text").mark(pos_keywords, options);
+            $("#md-div").mark(Array.from(pos_keywords_proc_1), options_pos_1);
+            $("#md-div").mark(Array.from(pos_keywords_proc_2), options_pos_2);
+            $("#md-div").mark(Array.from(pos_keywords_proc_3), options_pos_3);
+            $("#md-div").mark(Array.from(pos_keywords_proc_4), options_pos_4);
+            $("#md-div").mark(Array.from(pos_keywords_proc_5), options_pos_5);
+
+            $("#md-div").mark(Array.from(neg_keywords_proc_1), options_neg_1);
+            $("#md-div").mark(Array.from(neg_keywords_proc_2), options_neg_2);
+            $("#md-div").mark(Array.from(neg_keywords_proc_3), options_neg_3);
+            $("#md-div").mark(Array.from(neg_keywords_proc_4), options_neg_4);
+            $("#md-div").mark(Array.from(neg_keywords_proc_5), options_neg_5);
           }
         });
 
