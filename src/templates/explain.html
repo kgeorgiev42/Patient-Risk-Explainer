@@ -1,9 +1,81 @@
 {% extends "layout.html" %}
 
 {% block explain %}
+<!-- Bootstrap core JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+<!-- Third party plugin JS-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+<!-- Core theme JS-->
+<script src="../static/js/scripts.js"></script>
+<script src="../static/js/jquery.highlight-within-textarea.js"></script>
+<script src="../static/js/jquery.mark.min.js"></script>
+<script src="../static/js/Chart.js"></script>
+<script src="../static/js/Chart.min.js"></script>
 
 <style>
+ /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
 
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #58c159;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #7be876;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 </style>
 
 <div class="container">
@@ -91,14 +163,7 @@
 
 
             <div class="row">
-                <div class="content wow fadeInLeft col-md-6">
-                    <div class="cta-btn-container text-center">
-                        <button class="btn btn-outline btn-sm" id="explain" type="submit" style="background-color:aquamarine">
-                            Explain letter
-                        </button>
-                    </div>
-                </div>
-                <div class="content wow fadeInLeft col-md-6">
+                <div class="content wow fadeInLeft col-md-12">
                     <div class="cta-btn-container text-center">
                         <button class="btn btn-outline btn-sm" id="clear" type="button" style="background-color:rosybrown">
                             Clear results
@@ -108,15 +173,15 @@
             </div>
 
             <div class="row">
-                <div class="container text-center">
-                    <h4 class="err-mes" style="margin: 20px auto; color:darkorange">{{message}}</h4>
+                <div class="container text-center" style="margin-top: 25px;">
+                <canvas id="bar-chart-horizontal" width="1300" height="650"></canvas>
                 </div>
             </div>
 
             <div class="row">
-                <h6 style="display: block; margin: 20px auto;">
-                    Warning: This may take a few minutes to process.
-                </h6>
+                <div class="container text-center">
+                    <h4 class="err-mes" style="margin: 20px auto; color:darkorange">{{message}}</h4>
+                </div>
             </div>
 
             <div class="text-center" style="margin-top:10px; margin-bottom:10px;">
@@ -125,21 +190,23 @@
                 {% endfor %}
             </div>
 
-            <div class="row">
-                <p id="load_text" style="display: block; margin: auto; visibility: hidden;">Loading...</p>
-            </div>
+         <div class="row">
+             <div class="container text-center" style="margin-top:10px; margin-bottom:30px;">
+                 <!-- Rounded switch -->
+                 <p>Show/hide explainer statistics</p>
+                <label class="switch">
+                  <input type="checkbox" class="switch" checked>
+                  <span class="slider round"></span>
 
-            <div class="row">
-                <div id="load_bar" class="spinner-grow text-info row-cols-md-12" style="margin: 20px auto; width: 35px; visibility: hidden;" role="status">
-                  <span class="sr-only text-center">Loading...</span>
-                </div>
-            </div>
+                </label>
+             </div>
+         </div>
 
      </form>
 
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid explainer-stats">
     <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-6">
@@ -294,6 +361,7 @@
 </style>
 
 <script type="text/javascript">
+
     function termFreqMap(str) {
         var words = str.split(' ');
         var termFreq = {};
@@ -616,7 +684,58 @@
             });
         */
         console.log(explanations)
+        exp_labels = []; exp_values = []; exp_colors = []; exp_labels_full = [];
+        for (var example in explanations) {
+            if(explanations[example][0].length >= 100){
+                exp_labels.push(explanations[example][0].slice(0, 93) + "...")
+            }
+            else {
+                exp_labels.push(explanations[example][0])
+            }
+
+            exp_labels_full.push(explanations[example][0])
+            exp_values.push(explanations[example][1])
+            if (explanations[example][1] > 0) {
+                exp_colors.push("#eb6238")
+            }
+            else {
+                exp_colors.push("#57c72e")
+            }
+        }
+
+            new Chart(document.getElementById("bar-chart-horizontal"), {
+            type: 'horizontalBar',
+            data: {
+              labels: exp_labels,
+              datasets: [
+                {
+                  label: "Explanation value",
+                  backgroundColor: exp_colors,
+                  data: exp_values
+                }
+              ]
+            },
+            options: {
+              legend: { display: false },
+              title: {
+                display: true,
+                text: 'Explanation sentence relevance'
+              }
+            }
+            });
     }
+
+    $(document).ready(function () {
+      $(".switch").click(function(){
+            if($(this).prop("checked") === true){
+                $(".explainer-stats").show();
+            }
+            else if($(this).prop("checked") === false){
+                $(".explainer-stats").hide();
+            }
+        });
+    });
+
 </script>
 
 {% endblock %}
