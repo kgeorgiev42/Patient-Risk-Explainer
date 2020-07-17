@@ -21,8 +21,9 @@ class ExplainerController():
 
     """
 
-    def __init__(self, model_type, model_config, data_config):
+    def __init__(self, model_type, task, model_config, data_config):
         self.model_type = model_type
+        self.task = task
         self.model_config = self._load_config(model_config)
         self.data_config = self._load_config(data_config)
 
@@ -35,20 +36,20 @@ class ExplainerController():
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
-        if os.path.isdir(self.model_config['explainers'][self.model_type]['download_path']):
+        if os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['download_path']):
             logging.info('Model already exists.. Skipping download')
             return
 
-        for object in bucket.objects.filter(Prefix=self.model_config['explainers'][self.model_type]['path']):
+        for object in bucket.objects.filter(Prefix=self.model_config['explainers'][self.task][self.model_type]['path']):
             if not os.path.exists(os.path.dirname(object.key)):
                 os.makedirs(os.path.dirname(object.key))
             bucket.download_file(object.key, object.key)
 
-        bucket.download_file(self.model_config['explainers'][self.model_type]['risk_path'],
-                             self.model_config['explainers'][self.model_type]['risk_path'])
+        bucket.download_file(self.model_config['explainers'][self.task][self.model_type]['risk_path'],
+                             self.model_config['explainers'][self.task][self.model_type]['risk_path'])
 
-        bucket.download_file(self.model_config['explainers']['tokenizer_path'],
-                             self.model_config['explainers']['tokenizer_path'])
+        bucket.download_file(self.model_config['explainers'][self.task]['tokenizer_path'],
+                             self.model_config['explainers'][self.task]['tokenizer_path'])
 
         logging.info('Model download successful.')
 
@@ -75,15 +76,15 @@ class ExplainerController():
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
-        if not os.path.isdir(self.model_config['explainers'][self.model_type]['download_path']):
+        if not os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['download_path']):
             logging.info('Model not downloaded yet.. call download first.')
             return
 
-        model = models.load_model(self.model_config['explainers'][self.model_type]['download_path'])
-        with open(self.model_config['explainers']['tokenizer_local_path'], 'rb') as handle:
+        model = models.load_model(self.model_config['explainers'][self.task][self.model_type]['download_path'])
+        with open(self.model_config['explainers'][self.task]['tokenizer_local_path'], 'rb') as handle:
             tokenizer = pickle.load(handle)
 
-        with open(self.model_config['explainers'][self.model_type]['risk_local_path'], 'rb') as handle:
+        with open(self.model_config['explainers'][self.task][self.model_type]['risk_local_path'], 'rb') as handle:
             risk_grps = pickle.load(handle)
 
         return model, tokenizer, risk_grps

@@ -38,15 +38,15 @@ def home():
     prep_letter = filter_text(prep_letter)
 
     #### 2. Download model files
-    controller = ExplainerController(selected_model, 'config/model_config.yml', 'config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml', 'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
 
     #### 3. Initialize predictor and explainer
     predictor = Predictor(tokenizer, ft_model, risk_grps,
-                          controller.model_config['explainers']['task']['class_names'])
+                          controller.model_config['explainers'][selected_task]['class_names'])
     explainer = Explainer(tokenizer, ft_model,
-                          controller.model_config['explainers']['task']['class_names'], predictor)
+                          controller.model_config['explainers'][selected_task]['class_names'], predictor)
 
     #### 4. Extract predictions
     prep_letter = explainer.preprocess_set([prep_letter], puncts, odd_chars, contraction_mapping)
@@ -92,6 +92,7 @@ def home():
     session['t_pos_sent_exp_vals'] = [round(el[1], 4) for el in full_df.iloc[0].S_Top_Pos_Ranks.items()]
     session['t_neg_sent_exp_vals'] = [round(el[1], 4) for el in full_df.iloc[0].S_Top_Neg_Ranks.items()]
     session['explanations'] = json.dumps([(el[0], el[1]) for el in full_df.iloc[0].Explanations])
+    session['risk_str'] = 'High risk' if full_df.iloc[0].Risk >= selected_threshold else 'Low risk'
     #session['raw_letter'] = full_df.iloc[0].Raw_Text
 
     return jsonify(list(session.items()))

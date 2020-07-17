@@ -232,7 +232,7 @@ input:checked + .slider:before {
                 <tbody>
                     <tr>
                         <th scope="row">Patient risk score:</th>
-                        <td class="text-center">{{session['risk_score']}}</td>
+                        <td class="text-center">{{session['risk_score']}} ({{session['risk_str']}})</td>
                     </tr>
                     <tr>
                         <th scope="row">Patient risk percentage:</th>
@@ -719,7 +719,7 @@ input:checked + .slider:before {
               legend: { display: false },
               title: {
                 display: true,
-                text: 'Explanation sentence relevance'
+                text: 'Explanation sentence relevance (positives - red, negatives - green)'
               }
             }
             });
