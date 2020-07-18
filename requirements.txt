@@ -70,7 +70,6 @@ pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pybind11==2.5.0
 pyparsing==2.4.7
-pypiwin32==223
 pysbd==0.2.3
 pytest==5.4.3
 pytest-cov==2.10.0
