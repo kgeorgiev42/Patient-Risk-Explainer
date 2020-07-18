@@ -2,7 +2,6 @@ image: python:3.7
 
 stages:
   - test
-  - dev
 
 variables:
   AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
@@ -20,18 +19,9 @@ test:
     - python --version
     - echo "Running tests"
     - python -m pytest tests
-  only:
-  - dev
-
-dev:
-  stage: dev
-  script:
     - echo "Testing flask app launch"
-    - python --version
     - echo "FLASK_ENV=development"
     - echo "FLASK_APP=app.py"
     - python app.py
-  environment:
-    name: dev
   only:
   - dev
