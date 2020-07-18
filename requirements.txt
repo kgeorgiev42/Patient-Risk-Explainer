@@ -44,7 +44,7 @@ Keras-Preprocessing==1.1.2
 keyring==9.0
 keyrings.alt==3.4.0
 kiwisolver==1.2.0
-lime @ file:///./ext_packages/lime
+lime @ file:///ext_packages/lime
 Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.2
