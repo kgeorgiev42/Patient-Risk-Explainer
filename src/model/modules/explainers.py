@@ -128,9 +128,10 @@ class Explainer(BaseExplainer):
     num_features - number of words/sentences to score
     '''
 
-    def __init__(self, tokenizer, clf, class_names, predictor):
+    def __init__(self, tokenizer, clf, class_names, predictor, threshold):
         super().__init__(tokenizer, clf, class_names)
         self.predictor = predictor
+        self.threshold = threshold
 
     def seq_explain(self, sentences, top_labels=1, sample_size=5000, num_features=20):
         '''
@@ -194,7 +195,7 @@ class Explainer(BaseExplainer):
         prob_mean = mean([prob_scores[i][1] for i in range(len(prob_scores))])
 
         print('Probability of risk (positive):', prob_mean)
-        pred_cls = self.class_names[1] if prob_mean > self.predictor.risk_grps[-1] else self.class_names[0]
+        pred_cls = self.class_names[1] if prob_mean > self.predictor.risk_grps[self.threshold - 1] else self.class_names[0]
         print('Predicted class:', pred_cls)
         if true_cls is not None:
             print('True class:', true_cls)

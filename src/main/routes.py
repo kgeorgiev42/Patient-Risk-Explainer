@@ -93,6 +93,14 @@ def home():
     session['t_neg_sent_exp_vals'] = [round(el[1], 4) for el in full_df.iloc[0].S_Top_Neg_Ranks.items()]
     session['explanations'] = json.dumps([(el[0], el[1]) for el in full_df.iloc[0].Explanations])
     session['risk_str'] = 'High risk' if full_df.iloc[0].Risk >= selected_threshold else 'Low risk'
+    if selected_model == '1d_cnn':
+        session['model_name'] = '1D-Conv-LSTM'
+    else:
+        session['model_name'] = 'Fasttext'
+    if selected_task == 'rod_task':
+        session['task_name'] = 'Risk of death estimation (1yr)'
+    else:
+        session['task_name'] = 'Risk of hospital readmission (30d)'
     #session['raw_letter'] = full_df.iloc[0].Raw_Text
 
     return jsonify(list(session.items()))

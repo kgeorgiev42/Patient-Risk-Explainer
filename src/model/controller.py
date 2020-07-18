@@ -36,14 +36,20 @@ class ExplainerController():
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
-        if os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['download_path']):
+        if os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['path']):
             logging.info('Model already exists.. Skipping download')
             return
 
-        for object in bucket.objects.filter(Prefix=self.model_config['explainers'][self.task][self.model_type]['path']):
-            if not os.path.exists(os.path.dirname(object.key)):
-                os.makedirs(os.path.dirname(object.key))
+        if not os.path.exists(self.model_config['explainers'][self.task][self.model_type]['path']):
+            os.makedirs(os.path.dirname(self.model_config['explainers'][self.task][self.model_type]['path']))
+            os.makedirs(os.path.dirname(self.model_config['explainers'][self.task][self.model_type]['path'] + 'assets/'))
+            os.makedirs(os.path.dirname(self.model_config['explainers'][self.task][self.model_type]['path'] + 'variables/'))
+
+        for object in bucket.objects.filter(Prefix=self.model_config['explainers'][self.task][self.model_type]['path'] + 'variables/'):
             bucket.download_file(object.key, object.key)
+
+        bucket.download_file(self.model_config['explainers'][self.task][self.model_type]['path'] + 'saved_model.pb',
+                             self.model_config['explainers'][self.task][self.model_type]['path'] + 'saved_model.pb')
 
         bucket.download_file(self.model_config['explainers'][self.task][self.model_type]['risk_path'],
                              self.model_config['explainers'][self.task][self.model_type]['risk_path'])
@@ -53,53 +59,19 @@ class ExplainerController():
 
         logging.info('Model download successful.')
 
-    def download_mimic_data(self):
-        if os.path.isdir(self.data_config['data']['mimic']['path']):
-            logging.info('Data already downloaded.. Skipping download')
-            return
-
-        bucket.download_file(os.path.join(self.data_config['data']['mimic']['path'], 'dc_train_sent.npy'),
-                             os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_train_sent.npy'))
-
-        bucket.download_file(os.path.join(self.data_config['data']['mimic']['path'], 'dc_train_sent_lab.npy'),
-                             os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_train_sent_lab.npy'))
-
-        bucket.download_file(os.path.join(self.data_config['data']['mimic']['path'], 'dc_val_sent.npy'),
-                             os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_val_sent.npy'))
-
-        bucket.download_file(os.path.join(self.data_config['data']['mimic']['path'], 'dc_val_sent.npy'),
-                             os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_val_sent_lab.npy'))
-
-        logging.info('Data download successful.')
-
     def load_model_files(self):
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
-        if not os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['download_path']):
+        if not os.path.isdir(self.model_config['explainers'][self.task][self.model_type]['path']):
             logging.info('Model not downloaded yet.. call download first.')
             return
 
-        model = models.load_model(self.model_config['explainers'][self.task][self.model_type]['download_path'])
-        with open(self.model_config['explainers'][self.task]['tokenizer_local_path'], 'rb') as handle:
+        model = models.load_model(self.model_config['explainers'][self.task][self.model_type]['path'])
+        with open(self.model_config['explainers'][self.task]['tokenizer_path'], 'rb') as handle:
             tokenizer = pickle.load(handle)
 
-        with open(self.model_config['explainers'][self.task][self.model_type]['risk_local_path'], 'rb') as handle:
+        with open(self.model_config['explainers'][self.task][self.model_type]['risk_path'], 'rb') as handle:
             risk_grps = pickle.load(handle)
 
         return model, tokenizer, risk_grps
-
-    def load_mimic(self):
-        if not os.path.isdir(self.data_config['data']['mimic']['path']):
-            logging.info('Data not downloaded yet.. call download first.')
-            return
-
-        dc_train = np.load(os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_train_sent.npy'),
-                           allow_pickle=True)
-        dc_train_labels = np.load(
-            os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_train_sent_lab.npy'))
-        dc_val = np.load(os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_val_sent.npy'),
-                         allow_pickle=True)
-        dc_val_labels = np.load(os.path.join(self.data_config['data']['mimic']['download_path'], 'dc_val_sent_lab.npy'))
-
-        return dc_train, dc_train_labels, dc_val, dc_val_labels

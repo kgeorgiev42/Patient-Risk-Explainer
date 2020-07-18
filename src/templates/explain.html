@@ -92,58 +92,10 @@ input:checked + .slider:before {
         {% endwith %}
     </div>
      <form action="" method="post" role="form" id="upload-form" enctype="multipart/form-data">
-         <div class="row">
-                <div class="form-group col-md-3 text-center">
-                    <h6>Select pre-trained model:</h6>
-                    <div class="btn-group">
-                        <select name="model-select" class="custom-select custom-select-sm">
-                            <option value="fasttext" selected>Fasttext (faster but less precise)</option>
-                            <option value="1d_cnn">1D-CNN (slower but more precise)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-3 text-center">
-                    <h6>Select task to perform:</h6>
-                    <div class="btn-group">
-                        <select name="task-select" class="custom-select custom-select-sm">
-                            <option value="Risk of death" selected>Risk of death estimation (1yr)</option>
-                            <option value="Risk of hospital readmission">Risk of hospital readmission (1yr)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-group col-md-6 text-center">
-                    <h6>Select decision threshold (for model sensitivity tuning):</h6>
-
-                    <div class="btn-group">
-                        <select name="threshold-select" class="custom-select custom-select-sm">
-                            <option value="Default" selected>Default</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                    </div>
-                    <p class="small" style="margin-top: 20px">(Default values: Fasttext - 8, 1D-CNN - 10)</p>
-                </div>
-            </div>
-
 
         <div class="row">
             <div class="container-fluid">
-                <h5 class="text-center">Upload letter to explain:</h5>
-            </div>
-            <div class="col-lg-12 content wow fadeInLeft">
-                <div class="container-fluid">
-                    <div class="form-row">
-                        <div class="input-group">
-                          <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="upload_file"
-                              aria-describedby="upload_button">
-                            <label id="custom-file-label" class="custom-file-label" for="upload_file">Choose file (.txt file required)</label>
-                          </div>
-                        </div>
-                    </div>
-                </div>
+                <h5 class="text-center">Explanation highlights:</h5>
             </div>
         </div>
 
@@ -230,6 +182,14 @@ input:checked + .slider:before {
                     </tr>
                 </thead>
                 <tbody>
+                    <tr>
+                        <th scope="row">Model name:</th>
+                        <td class="text-center">{{session['model_name']}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Task name:</th>
+                        <td class="text-center">{{session['task_name']}}</td>
+                    </tr>
                     <tr>
                         <th scope="row">Patient risk score:</th>
                         <td class="text-center">{{session['risk_score']}} ({{session['risk_str']}})</td>

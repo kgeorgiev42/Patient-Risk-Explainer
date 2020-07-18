@@ -12,11 +12,10 @@ from tqdm import tqdm
 
 
 class Evaluator():
-    def __init__(self, explainer, predictor, pred_df, threshold=8):
+    def __init__(self, explainer, predictor, pred_df):
         self.explainer = explainer
         self.predictor = predictor
         self.pred_df = pred_df
-        self.threshold = threshold
 
     def lime_eval_predictions(self, sample_size=5000, num_features=20):
         eval_df = pd.DataFrame()

@@ -1,7 +1,6 @@
 explainers:
   rod_task:
-    tokenizer_path: 's3://prme-main/data/pickles/tokenizer.pickle'
-    tokenizer_local_path: './data/pickles/tokenizer.pickle'
+    tokenizer_path: 'data/pickles/tokenizer.pickle'
     name: 'Risk of death'
     class_names:
       - 'Not Likely To Die'
@@ -10,22 +9,17 @@ explainers:
     fasttext:
       model_name: 'fasttext_def_v2'
       version: 2.0
-      path: 's3://prme-main/models/fasttext_def_v2'
-      risk_path: 's3://prme-main/data/pickles/fasttext_risk.pickle'
-      download_path: './models/fasttext_def_v2'
-      risk_local_path: './data/pickles/fasttext_risk.pickle'
+      path: 'models/fasttext_def_v2/'
+      risk_path: 'data/pickles/fasttext_risk.pickle'
 
     1d_cnn:
       model_name: '1d_cnn_def_v2'
       version: 2.0
-      path: 's3://prme-main/models/1d_cnn_def_v2'
-      risk_path: 's3://prme-main/data/pickles/1d_cnn_risk.pickle'
-      download_path: './models/1d_cnn_def_v2'
-      risk_local_path: './data/pickles/1d_cnn_risk.pickle'
+      path: 'models/1d_cnn_def_v2/'
+      risk_path: 'data/pickles/1d_cnn_risk.pickle'
 
   rohr_task:
-    tokenizer_path: 's3://prme-main/data/pickles/tokenizer_readm.pickle'
-    tokenizer_local_path: './data/pickles/tokenizer_readm.pickle'
+    tokenizer_path: 'data/pickles/tokenizer_readm.pickle'
     name: 'Risk of hospital readmission'
     class_names:
       - 'Not Likely For Readmission'
@@ -34,18 +28,14 @@ explainers:
     fasttext:
       model_name: 'fasttext_def_v2_readm'
       version: 2.0
-      path: 's3://prme-main/models/fasttext_def_v2_readm'
-      risk_path: 's3://prme-main/data/pickles/fasttext_risk_readm.pickle'
-      download_path: './models/fasttext_def_v2_readm'
-      risk_local_path: './data/pickles/fasttext_risk_readm.pickle'
+      path: 'models/fasttext_def_v2_readm/'
+      risk_path: 'data/pickles/fasttext_risk_readm.pickle'
 
     1d_cnn:
       model_name: '1d_cnn_def_v2_readm'
       version: 2.0
-      path: 's3://prme-main/models/1d_cnn_def_v2_readm'
-      risk_path: 's3://prme-main/data/pickles/1d_cnn_risk_readm.pickle'
-      download_path: './models/1d_cnn_def_v2_readm'
-      risk_local_path: './data/pickles/1d_cnn_risk_readm.pickle'
+      path: 'models/1d_cnn_def_v2_readm/'
+      risk_path: 'data/pickles/1d_cnn_risk_readm.pickle'
 
 
 

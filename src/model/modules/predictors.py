@@ -10,10 +10,11 @@ class Predictor(BaseExplainer):
     1D-CNN Prediction class for a Keras-based classifier with tokenization.
     '''
 
-    def __init__(self, tokenizer, clf, risk_grps, class_names):
+    def __init__(self, tokenizer, clf, risk_grps, class_names, threshold):
         super().__init__(tokenizer, clf, class_names)
         self.MAX_SEQ_LENGTH = 6489
         self.risk_grps = risk_grps
+        self.threshold = threshold
 
     def extract_set_preds(self, data, labels=None):
         letter_dict = {}
@@ -27,7 +28,7 @@ class Predictor(BaseExplainer):
         probs = self.clf.predict(text_data)
         for i in tqdm(range(len(probs))):
             risk_score = self.get_risk_grp(probs[i])
-            pred_label = self.class_names[1] if risk_score == 10 else self.class_names[0]
+            pred_label = self.class_names[1] if risk_score >= self.threshold else self.class_names[0]
             if labels is not None:
                 true_label = labels[i]
                 letter_dict[letters[i]] = (probs[i], risk_score, pred_label, self.class_names[true_label], self.risk_grps[risk_score - 1])
