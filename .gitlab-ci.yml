@@ -1,0 +1,70 @@
+image: python:3.8
+
+stages:
+  - test
+  - dev
+  - deploy
+
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  AWS_DEFAULT_REGION: eu-west-2
+
+test:
+  stage: test
+  before_script:
+    - pip install awscli # Install the SDK
+  script:
+    - python --version
+    - echo "Running tests"
+    - echo "FLASK_ENV=testing"
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - pip install -r requirements.txt
+    - python -m pytest tests
+  only:
+  - dev
+  - stage
+  - prod
+  - master
+
+dev:
+  stage: dev
+  script:
+    - echo "Building the app"
+    - echo python --version
+  environment:
+    name: dev
+  only:
+  - dev
+
+deploy_staging:
+  stage: deploy
+  before_script:
+    - pip install awscli # Install the SDK
+    - pip install awsebcli --upgrade --user
+    - echo "[profile eb-cli]"
+    - echo "aws_access_key_id=$AWS_ACCESS_KEY_ID"
+    - echo "aws_secret_access_key=$AWS_SECRET_ACCESS_KEY"
+    - echo "FLASK_ENV=deployment"
+  environment:
+    name: prod
+  script:
+    - echo "Deploy to staging server"
+    - pip install -r requirements.txt
+    - /root/.local/bin/eb deploy va-bs-backend-prod
+  only:
+    - prod
+    - master
+
+deploy_prod:
+  stage: deploy
+  before_script:
+    - pip install awscli # Install the SDK
+  script:
+    - echo "Deploy to production server"
+  environment:
+    name: prod
+  when: manual
+  only:
+  - master

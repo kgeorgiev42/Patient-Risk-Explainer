@@ -1,6 +1,7 @@
 absl-py==0.9.0
 appdirs==1.4.4
 astunparse==1.6.3
+atomicwrites==1.4.0
 attrs==19.3.0
 awscli==1.18.92
 awsebcli==3.18.1
@@ -8,7 +9,7 @@ black==19.10b0
 blis==0.4.1
 bokeh==2.1.1
 boto3==1.14.15
-botocore==1.17.15
+botocore==1.15.49
 cachetools==4.1.1
 catalogue==1.0.0
 cement==2.8.2
@@ -17,11 +18,13 @@ chardet==3.0.4
 click==7.1.2
 colorama==0.4.3
 conllu==3.0
+coverage==5.2
 cycler==0.10.0
 cymem==2.0.3
 decorator==4.4.2
 docutils==0.15.2
-en-core-sci-md@ https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.2.4/en_core_sci_md-0.2.4.tar.gz
+en-core-sci-md @ https://s3-us-west-2.amazonaws.com/ai2-s2-scispacy/releases/v0.2.4/en_core_sci_md-0.2.4.tar.gz
+enum34==1.1.10
 Flask==1.1.2
 future==0.16.0
 gast==0.3.3
@@ -38,11 +41,14 @@ Jinja2==2.11.2
 jmespath==0.10.0
 joblib==0.16.0
 Keras-Preprocessing==1.1.2
+keyring==9.0
+keyrings.alt==3.4.0
 kiwisolver==1.2.0
-lime@ file:///C:/Users/User/Machine%20Learning/Aberdeen/MSc%20Project/patient-risk-model-explainer-xai/models/lime
+lime @ file:///./ext_packages/lime
 Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.2
+more-itertools==8.4.0
 murmurhash==1.0.2
 networkx==2.4
 nltk==3.5
@@ -52,27 +58,33 @@ oauthlib==3.1.0
 opt-einsum==3.2.1
 packaging==20.4
 pandas==1.0.5
-pathspec==0.8.0
+pathspec==0.5.9
 Pillow==5.4.1
-plac==1.1.3
+plac==0.9.6
+pluggy==0.13.1
 preshed==3.0.2
 protobuf==3.12.2
 psutil==5.7.0
+py==1.9.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pybind11==2.5.0
 pyparsing==2.4.7
 pypiwin32==223
 pysbd==0.2.3
+pytest==5.4.3
+pytest-cov==2.10.0
 python-dateutil==2.8.0
+python-dotenv==0.14.0
 pytz==2020.1
 PyWavelets==1.1.1
 pywin32==227
+pywin32-ctypes==0.2.0
 PyYAML==5.3.1
 regex==2020.6.8
-requests==2.24.0
+requests==2.20.1
 requests-oauthlib==1.3.0
-rsa==3.4.2
+rsa==4.6
 s3transfer==0.3.3
 scikit-image==0.17.2
 scikit-learn==0.23.1
@@ -80,15 +92,15 @@ scipy==1.4.1
 scispacy==0.2.4
 seaborn==0.10.1
 semantic-version==2.5.0
-six==1.15.0
-spacy==2.3.0
+six==1.11.0
+spacy==2.2.0
 srsly==1.0.2
 tensorboard==2.2.2
 tensorboard-plugin-wit==1.7.0
 tensorflow-gpu==2.2.0
 tensorflow-gpu-estimator==2.2.0
 termcolor==1.1.0
-thinc==7.4.1
+thinc==7.1.1
 threadpoolctl==2.1.0
 tifffile==2020.6.3
 toml==0.10.1
@@ -98,6 +110,7 @@ typed-ast==1.4.1
 typing-extensions==3.7.4.2
 urllib3==1.24.3
 wasabi==0.7.0
+wcwidth==0.1.9
 Werkzeug==1.0.1
 wincertstore==0.2
 wrapt==1.12.1
