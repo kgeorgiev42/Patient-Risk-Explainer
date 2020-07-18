@@ -12,17 +12,13 @@ variables:
 test:
   stage: test
   before_script:
-    - pip install awscli # Install the SDK
+    - echo "FLASK_ENV=testing"
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
     - pip install -r requirements.txt
   script:
     - python --version
     - echo "Running tests"
-    - echo "FLASK_ENV=testing"
-    - unset AWS_ACCESS_KEY_ID
-    - unset AWS_SECRET_ACCESS_KEY
-    - aws configure set region $AWS_DEFAULT_REGION
-    - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-    - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
     - python -m pytest tests
   only:
   - dev
