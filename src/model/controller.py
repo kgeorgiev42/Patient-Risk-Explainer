@@ -48,6 +48,10 @@ class ExplainerController():
         for object in bucket.objects.filter(Prefix=self.model_config['explainers'][self.task][self.model_type]['path'] + 'variables/'):
             bucket.download_file(object.key, object.key)
 
+        try:
+            os.makedirs('data/pickles/')
+        except:
+            pass
         bucket.download_file(self.model_config['explainers'][self.task][self.model_type]['path'] + 'saved_model.pb',
                              self.model_config['explainers'][self.task][self.model_type]['path'] + 'saved_model.pb')
 

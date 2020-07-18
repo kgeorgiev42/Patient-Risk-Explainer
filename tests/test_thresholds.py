@@ -6,7 +6,7 @@ from src.model.modules.utils import clean_text, tokenize, filter_text, puncts, o
 
 
 def test_low_threshold():
-    with open('../samples/sample_letter.txt', 'r') as f:
+    with open('samples/sample_letter.txt', 'r') as f:
         raw_letter = f.read()
 
     assert(len(raw_letter) > 0)
@@ -22,7 +22,7 @@ def test_low_threshold():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml', '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml', 'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
     predictor = Predictor(tokenizer, ft_model, risk_grps,
@@ -45,7 +45,7 @@ def test_low_threshold():
 
 
 def test_high_threshold():
-    with open('../samples/sample_letter.txt', 'r') as f:
+    with open('samples/sample_letter.txt', 'r') as f:
         raw_letter = f.read()
 
     assert (len(raw_letter) > 0)
@@ -61,8 +61,8 @@ def test_high_threshold():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml',
-                                     '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml',
+                                     'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
     predictor = Predictor(tokenizer, ft_model, risk_grps,

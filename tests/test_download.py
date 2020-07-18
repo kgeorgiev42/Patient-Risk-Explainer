@@ -12,7 +12,7 @@ def test_download_fasttext():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml', '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml', 'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
     assert(len(risk_grps) > 0 and len(tokenizer.word_index) > 0)
@@ -27,7 +27,7 @@ def test_download_clstm():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml', '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml', 'config/data_config.yml')
     controller.download_model_files()
     cnn_model, tokenizer, risk_grps = controller.load_model_files()
     assert(len(risk_grps) > 0 and len(tokenizer.word_index) > 0)

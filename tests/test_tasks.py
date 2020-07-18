@@ -6,7 +6,7 @@ from src.model.modules.utils import clean_text, tokenize, filter_text, puncts, o
 
 
 def test_rod_task():
-    with open('../samples/sample_letter.txt', 'r') as f:
+    with open('samples/sample_letter.txt', 'r') as f:
         raw_letter = f.read()
 
     assert(len(raw_letter) > 0)
@@ -22,18 +22,20 @@ def test_rod_task():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml', '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml', 'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
     predictor = Predictor(tokenizer, ft_model, risk_grps,
-                          controller.model_config['explainers'][selected_task]['class_names'])
+                          controller.model_config['explainers'][selected_task]['class_names'],
+                          threshold=selected_threshold)
     explainer = Explainer(tokenizer, ft_model,
-                          controller.model_config['explainers'][selected_task]['class_names'], predictor)
+                          controller.model_config['explainers'][selected_task]['class_names'], predictor,
+                          threshold=selected_threshold)
     prep_letter = explainer.preprocess_set([prep_letter], puncts, odd_chars, contraction_mapping)
     letter_pred_dict = predictor.extract_set_preds([prep_letter])
     letter_df = predictor.preds_to_df(letter_pred_dict, raw_letter)
 
-    evaluator = Evaluator(explainer, predictor, letter_df, threshold=selected_threshold)
+    evaluator = Evaluator(explainer, predictor, letter_df)
     lime_df = evaluator.lime_eval_predictions()
     lime_df = evaluator.lime_extract_explainer_stats(lime_df)
     full_df = evaluator.sr_eval_predictions(lime_df)
@@ -44,7 +46,7 @@ def test_rod_task():
 
 
 def test_rohr_task():
-    with open('../samples/sample_letter.txt', 'r') as f:
+    with open('samples/sample_letter.txt', 'r') as f:
         raw_letter = f.read()
 
     assert (len(raw_letter) > 0)
@@ -60,19 +62,21 @@ def test_rohr_task():
         os.makedirs('data/pickles/')
     except:
         pass
-    controller = ExplainerController(selected_model, selected_task, '../config/model_config.yml',
-                                     '../config/data_config.yml')
+    controller = ExplainerController(selected_model, selected_task, 'config/model_config.yml',
+                                     'config/data_config.yml')
     controller.download_model_files()
     ft_model, tokenizer, risk_grps = controller.load_model_files()
     predictor = Predictor(tokenizer, ft_model, risk_grps,
-                          controller.model_config['explainers'][selected_task]['class_names'])
+                          controller.model_config['explainers'][selected_task]['class_names'],
+                          threshold=selected_threshold)
     explainer = Explainer(tokenizer, ft_model,
-                          controller.model_config['explainers'][selected_task]['class_names'], predictor)
+                          controller.model_config['explainers'][selected_task]['class_names'], predictor,
+                          threshold=selected_threshold)
     prep_letter = explainer.preprocess_set([prep_letter], puncts, odd_chars, contraction_mapping)
     letter_pred_dict = predictor.extract_set_preds([prep_letter])
     letter_df = predictor.preds_to_df(letter_pred_dict, raw_letter)
 
-    evaluator = Evaluator(explainer, predictor, letter_df, threshold=selected_threshold)
+    evaluator = Evaluator(explainer, predictor, letter_df)
     lime_df = evaluator.lime_eval_predictions()
     lime_df = evaluator.lime_extract_explainer_stats(lime_df)
     full_df = evaluator.sr_eval_predictions(lime_df)

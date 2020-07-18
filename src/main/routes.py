@@ -44,9 +44,11 @@ def home():
 
     #### 3. Initialize predictor and explainer
     predictor = Predictor(tokenizer, ft_model, risk_grps,
-                          controller.model_config['explainers'][selected_task]['class_names'])
+                          controller.model_config['explainers'][selected_task]['class_names'],
+                          threshold=selected_threshold)
     explainer = Explainer(tokenizer, ft_model,
-                          controller.model_config['explainers'][selected_task]['class_names'], predictor)
+                          controller.model_config['explainers'][selected_task]['class_names'], predictor,
+                          threshold=selected_threshold)
 
     #### 4. Extract predictions
     prep_letter = explainer.preprocess_set([prep_letter], puncts, odd_chars, contraction_mapping)
@@ -54,7 +56,7 @@ def home():
     letter_df = predictor.preds_to_df(letter_pred_dict, raw_letter)
 
     #### 5. Evaluate with LIME and Sentence Ranking
-    evaluator = Evaluator(explainer, predictor, letter_df, threshold=selected_threshold)
+    evaluator = Evaluator(explainer, predictor, letter_df)
     lime_df = evaluator.lime_eval_predictions()
     lime_df = evaluator.lime_extract_explainer_stats(lime_df)
     full_df = evaluator.sr_eval_predictions(lime_df)
