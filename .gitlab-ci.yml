@@ -19,9 +19,8 @@ test:
     - python --version
     - echo "Running tests"
     - python -m pytest tests
-    - echo "Testing flask app launch"
+    - echo "Testing flask app"
     - echo "FLASK_ENV=development"
     - echo "FLASK_APP=app.py"
-    - python app.py
   only:
   - dev
