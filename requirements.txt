@@ -94,8 +94,8 @@ spacy==2.2.0
 srsly==1.0.2
 tensorboard==2.2.2
 tensorboard-plugin-wit==1.7.0
-tensorflow==2.2.0
-#tensorflow-gpu-estimator==2.2.0
+tensorflow-gpu==2.2.0
+tensorflow-gpu-estimator==2.2.0
 termcolor==1.1.0
 thinc==7.1.1
 threadpoolctl==2.1.0
