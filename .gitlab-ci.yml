@@ -35,13 +35,15 @@ deploy:
     - echo "FLASK_ENV=deployment"
     - echo $AWS_ACCESS_KEY_ID
     - echo $AWS_SECRET_ACCESS_KEY
-    - pip install -r requirements.txt
+    - pip install awscli # Install the SDK
     - pip install awsebcli --upgrade --user
+    - echo "[profile eb-cli]"
   script:
     - python --version
     - echo "Deploying Flask application"
+    - pip install -r requirements.txt
     - echo "FLASK_APP=application.py"
-    - /root/.local/bin/eb deploy patient-risk-model-explainer-ui
+    - /root/.local/bin/eb deploy prme-env
   environment:
     name: prod
   only:

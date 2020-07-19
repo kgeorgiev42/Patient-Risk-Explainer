@@ -1,0 +1,75 @@
+# environment
+prme/
+data/
+models/
+resources/
+
+src/static/bower_components
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+*.ipynb_checkpoints
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# VS Studio Code
+.vscode
+
+# PyCharm
+.idea/
+
+# Dropbox
+.dropbox.attr
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*BS-Copy1.ipynb
+
+# pyenv
+.python-version
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+/models/bert_full/
+/models/bert_opt_w.h5
+/models/bert_pretrain_output_all_notes_150000/
+/models/1d_cnn_def.h5
+/models/1d_cnn_def/
+/models/bert_opt_w3.h5
+/models/ft_supervised_opt.bin
+/models/ft_supervised_vectors_def.txt
+/models/ft_unsupervised_vectors.txt
+/data/
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
