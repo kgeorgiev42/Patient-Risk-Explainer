@@ -1,0 +1,11 @@
+AWSConfigurationTemplateVersion: 1.1.0.0
+OptionSettings:
+  aws:autoscaling:launchconfiguration:
+    IamInstanceProfile: aws-eb-role-full
+  aws:ec2:instances:
+    EnableSpot: true
+    InstanceTypes: 't2.micro, t3.micro'
+CName: prme-main
+EnvironmentTier:
+  Type: Standard
+  Name: WebServer
