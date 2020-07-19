@@ -44,7 +44,7 @@ Keras-Preprocessing==1.1.2
 keyring==9.0
 keyrings.alt==3.4.0
 kiwisolver==1.2.0
-lime @ git+git://github.com/JadeBlue96/lime.git
+lime @ git+git://github.com/JadeBlue96/lime.git#egg=lime
 Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.2
