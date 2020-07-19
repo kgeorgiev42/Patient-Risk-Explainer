@@ -4,7 +4,7 @@ OptionSettings:
     IamInstanceProfile: aws-eb-role-full
   aws:ec2:instances:
     EnableSpot: true
-    InstanceTypes: 'g3s.xlarge'
+    InstanceTypes: 't2.micro, t3.micro'
 CName: prme-main
 EnvironmentTier:
   Type: Standard
