@@ -1,0 +1,213 @@
+Admission Date:  [**2162-3-1**]              Discharge Date:   [**2162-3-5**]
+
+Date of Birth:  [**2079-8-1**]             Sex:   M
+
+Service: NEUROSURGERY
+
+Allergies:
+Patient recorded as having No Known Allergies to Drugs
+
+Attending:[**First Name3 (LF) 78**]
+Chief Complaint:
+Headache
+
+Major Surgical or Invasive Procedure:
+none
+
+
+History of Present Illness:
+ c/o severe headache with subsequent visual changes, went
+to OSH, CT showed large left occipitoparietal hemmorrhage. Pt
+began to have right weakness, was intubated and transferred to
+[**Hospital1 18**] ED for further evaluation and treatment.
+
+
+Past Medical History:
+BPH, thyroid disease,
+Hypothyroidism
+CAD
+PPM ([**Company 1543**]) 08 for AV block
+BPH
+s/p colostomy and reversal in 05 for a sigmoid volvulus
+Meniere's (recurrent episodes of dizziness, not known to have
+falls)
+IBS
+Osteoporosis
+recent MMSE 26/30 ---> executive dysfunction in cognitive
+testing
+
+
+Social History:
+lives independently, retired executive, currently
+writing a book
+
+
+Family History:
+Noncontributory
+
+Physical Exam:
+Mental status: intubated, ventilated
+Versed given at 6 am (2 mg), examined at 7 am, and again at 7:10
+
+am.
+
+Cranial nerves
+Right pupil reactive 2.5--->2 mm, left pupil unreactive. Corneal
+
+present in the right eye weakly. No nasal tickle. No doll's
+head.
+Weak gag (suction tubing)
+
+Motor
+Does not withdraw to noxious stimuli throughout. Tone slightly
+increased in the right arm. Reflexes brisker on the right (+2)
+than on the left 2, plantars mute.
+
+Imaging
+CT head scan described above.
+
+Upon discharge:
+
+Awake, alert, mumbling words.
+Pupils 3 to 2mm bil
+Moves Left spontaniously
+Right upper extremity plegic
+Right lower withdraws to pain
+
+Pt. being fed via feeding tube
+
+Pertinent Results:
+CT head on admit:
+
+IMPRESSION:
+1. Large left parieto-occipital intraparenchymal hematoma with
+subdural and subarachnoid hemorrhage as described above.
+2. Approximately 1 cm subfalcine herniation appears to be
+unchanged since the prior study; however, direct comparison is
+limited in the absence of outside hospital study scanned into
+PACS at the time of this dictation.
+
+NOTE ADDED AT ATTENDING REVIEW: I agree with the interpretation
+of the [**Hospital1 18**] study. However, the outside images are not
+available for review at this time, so I cannot determine whether
+there have been changes in the interval. The study and the
+report were reviewed by the staff radiologist.
+
+CTA:
+IMPRESSION:
+1. Large left parieto-occipital hemorrhage with surrounding
+edema. While
+this appearance is not definitive, likely etiologies include a
+hemorrhagic
+infarct. Less likely consideration would be amyloid angiopathy.
+2. Small left subdural hematoma with associated right shift of
+normal midline structures.
+3. Unremarkable post-contrast angiogram images with no evidence
+of arterial or venous filling defects.
+
+
+Brief Hospital Course:
+Mr [**Known lastname 7143**] was admitted to the TSICU was started on Mannitol and
+his BP<140. He began to localize his left arm and withdraw his
+legs. His respiratory status improved and family made the
+decision to have him extubated and chaged his Code status to
+DNR/DNI.
+
+He presented with hyponatremia and was undergoing ongoing
+replacement therapy. He also had a CTA performed that was
+negative for possible aneurysm or AVM as the source of the
+bleed.
+
+Given patient's pre-hospital status and level of functioning and
+previously expressed desires for care, after a family meeting
+with the neurosurgery and neurology service the family decided
+to not esculate care and continue with supportive care only.
+
+Medications on Admission:
+Levox 88 mcg
+Florinef 0.1 mg
+Finasteride 5 mg
+UroXatral one per day
+ASA 81 mg daily
+
+Allergies: NKDA
+
+Discharge Medications:
+1. Bisacodyl 5 mg Tablet, Delayed Release (E.C.) Sig: Two (2)
+Tablet, Delayed Release (E.C.) PO DAILY (Daily) as needed.
+2. Docusate Sodium 50 mg/5 mL Liquid Sig: Five (5) ml PO BID (2
+times a day).
+3. Fludrocortisone 0.1 mg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+4. Finasteride 5 mg Tablet Sig: One (1) Tablet PO DAILY (Daily).
+
+5. Acetaminophen 325 mg Tablet Sig: 1-2 Tablets PO Q6H (every 6
+hours) as needed.
+6. Heparin (Porcine) 5,000 unit/mL Solution Sig: One (1) ml
+Injection TID (3 times a day).
+7. Nicardipine 30 mg Capsule Sig: Two (2) Capsule PO Q8H (every
+8 hours).
+8. Levothyroxine 88 mcg Tablet Sig: One (1) Tablet PO DAILY
+(Daily).
+9. Ranitidine HCl 150 mg Tablet Sig: 0.5 Tablet PO BID (2 times
+a day).
+10. Ondansetron HCl (PF) 4 mg/2 mL Solution Sig: Two (2) ml
+Injection Q8H (every 8 hours) as needed.
+11. Metoprolol Tartrate 5 mg/5 mL Solution Sig: Five (5) ml
+Intravenous Q3H (every 3 hours) as needed for HR > 100.
+12. Dilaudid 1 mg/mL Solution Sig: 0.5-1 ml Injection every four
+(4) hours as needed for pain.
+
+
+Discharge Disposition:
+Extended Care
+
+Facility:
+[**Hospital3 10310**] Hospital
+
+Discharge Diagnosis:
+Large left parietoccipital hemorrhage measuring
+Protien/calorie malnutrition
+Dysphagia
+Altered mental status
+Right sided hemiparesis
+
+
+Discharge Condition:
+stable
+
+
+Discharge Instructions:
+??????    Take your pain medicine as prescribed.
+??????    Exercise should be limited to walking; no lifting, straining,
+or excessive bending.
+??????    Increase your intake of fluids and fiber, as narcotic pain
+medicine can cause constipation. We generally recommend taking
+an over the counter stool softener, such as Docusate (Colace)
+while taking narcotic pain medication.
+??????    Unless directed by your doctor, do not take any
+anti-inflammatory medicines such as Motrin, Aspirin, Advil, or
+Ibuprofen etc.
+
+CALL YOUR SURGEON IMMEDIATELY IF YOU EXPERIENCE ANY OF THE
+FOLLOWING
+
+??????    New onset of tremors or seizures.
+??????    Any confusion, lethargy or change in mental status.
+??????    Any numbness, tingling, weakness in your extremities.
+??????    Pain or headache that is continually increasing, or not
+relieved by pain medication.
+??????    New onset of the loss of function, or decrease of function on
+one whole side of your body.
+
+
+Followup Instructions:
+Follow up with Dr [**First Name (STitle) **] as needed, and call our office with any
+concerns or questions : [**Numeric Identifier 15826**]
+
+Dr. [**First Name (STitle) **] is the Neurologist that saw you in hospital as well.
+Please follow up with him as needed as well, his office # is :
+
+
+
+Completed by:[**2162-3-5**]

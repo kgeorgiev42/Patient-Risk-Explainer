@@ -99,6 +99,25 @@
          window.location.href='/home';
      })
 
+     $("#load_example").click(function () {
+         var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", "static/sample_letter.txt", false);
+        rawFile.onreadystatechange = function ()
+        {
+            if(rawFile.readyState === 4)
+            {
+                if(rawFile.status === 200 || rawFile.status === 0)
+                {
+                    var allText = rawFile.responseText;
+                    $('#custom-file-label').text("sample_letter.txt");
+                    $('#md-form-text').text(allText);
+                }
+            }
+        }
+        rawFile.send(null);
+
+     })
+
     $("#upload-form").submit(function (e) {
         e.preventDefault(); // block the traditional submission of the form.
         if ($('#md-form-text').text().trim() !== "") {

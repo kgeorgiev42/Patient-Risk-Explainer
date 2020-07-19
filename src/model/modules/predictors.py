@@ -14,7 +14,7 @@ class Predictor(BaseExplainer):
         super().__init__(tokenizer, clf, class_names)
         self.MAX_SEQ_LENGTH = 6489
         self.risk_grps = risk_grps
-        self.threshold = threshold
+        self.threshold = int(threshold)
 
     def extract_set_preds(self, data, labels=None):
         letter_dict = {}

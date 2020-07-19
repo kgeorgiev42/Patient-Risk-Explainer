@@ -2547,7 +2547,7 @@ textarea.form-control {
 
 .btn {
     display: inline-block;
-    font-weight: 400;
+    font-weight: 200;
     color: #212529;
     text-align: center;
     vertical-align: middle;
@@ -3209,7 +3209,7 @@ fieldset:disabled a.btn {
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
     line-height: 1.5;
-    border-radius: 0.2rem;
+    border-radius: 0.05rem;
 }
 
 .btn-block {
