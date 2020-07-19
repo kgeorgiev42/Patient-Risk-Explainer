@@ -12,6 +12,7 @@ __pycache__/
 *$py.class
 
 # Distribution / packaging
+ext_packages/
 .Python
 env/
 build/
