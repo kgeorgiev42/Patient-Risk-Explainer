@@ -41,7 +41,6 @@ deploy:
   script:
     - python --version
     - echo "Deploying Flask application"
-    - pip install -r requirements.txt
     - echo "FLASK_APP=application.py"
     - /root/.local/bin/eb deploy prme-env
   environment:
