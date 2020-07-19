@@ -68,8 +68,3 @@ ENV/
 /models/ft_supervised_vectors_def.txt
 /models/ft_unsupervised_vectors.txt
 /data/
-
-# Elastic Beanstalk Files
-.elasticbeanstalk/*
-!.elasticbeanstalk/*.cfg.yml
-!.elasticbeanstalk/*.global.yml
