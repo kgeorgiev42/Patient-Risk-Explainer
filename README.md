@@ -51,13 +51,17 @@ conda activate prme
 ```bash
 pip install –r requirements.txt
 ```
-<b>4.</b> Set the Flask app environment variables in your environment and run it locally:
+<b>4.</b> Pull the model files from S3 using:
+```bash
+aws s3 sync s3://prme-main/ . --no-sign-request
+```
+<b>5.</b> Set the Flask app environment variables in your environment and run it locally:
 ```bash
 set FLASK_APP=app.py
 set FLASK_ENV=development
 flask run
 ```
-<b>5.</b> Check that every package is installed correctly and that the models are downloaded successfully by running the unit tests:
+<b>6.</b> Check that every package is installed correctly and that the models are downloaded successfully by running the unit tests:
 ```bash
 python -m pytest --cov-report term-missing --cov=src tests/
 ```
