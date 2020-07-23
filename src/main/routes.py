@@ -18,7 +18,10 @@ logger.addHandler(handler)
 @bp.route('/')
 @bp.route('/home', methods=['GET', 'POST'])
 def home():
-    """Renders the home page."""
+    """Renders the home page.
+    Gets the input model parameters from the forms and runs the predictions with the selected config.
+    Returns the results (statistics, explanation highlights) in a JSON format, processed by AJAX.
+    """
     if request.method == 'GET':
         return render_template(
             'index.html',
@@ -109,7 +112,7 @@ def home():
 
 @bp.route('/explain')
 def explain():
-    """Renders the home page."""
+    """Renders the explanation page manually (for inference)."""
     return render_template(
         'explain.html',
         year=datetime.now().year,

@@ -12,12 +12,26 @@ from tqdm import tqdm
 
 
 class Evaluator():
+    """
+    Evaluator class for running the statistics on the model explanations.
+
+    Params:
+        explainer(modules.Explainer): the explanation module
+        predictor(modules.Predictor): the prediction module
+        pred_df(pandas.df): DataFrame containing the model predictions/explanations
+    """
     def __init__(self, explainer, predictor, pred_df):
         self.explainer = explainer
         self.predictor = predictor
         self.pred_df = pred_df
 
     def lime_eval_predictions(self, sample_size=5000, num_features=20):
+        """
+        Run the evaluation on the LIME module.
+        :param sample_size(int): number of samples to perturb per instance
+        :param num_features(int): number of features to score per sample
+        :return: pd.DataFrame(the concatenated DataFrame with the original containing the evaluation results)
+        """
         eval_df = pd.DataFrame()
         for idx, row in tqdm(self.pred_df.iterrows()):
             exp, exp_map = self.explainer.seq_explain(row.Text, sample_size, num_features)
@@ -32,6 +46,11 @@ class Evaluator():
         return pd.concat([self.pred_df, eval_df], axis=1)
 
     def lime_count_pos(self, exp_list):
+        """
+        Count the amount of positives in the list of explanations.
+        :param exp_list(list): a sample list from the DataFrame
+        :return: float(Positive ratio of samples)
+        """
         ctr_pos = 0
         for exp in exp_list:
             if exp[1] >= 0:
@@ -40,6 +59,11 @@ class Evaluator():
         return float(ctr_pos / len(exp_list))
 
     def lime_count_neg(self, exp_list):
+        """
+        Count the amount of negatives in the list of explanations.
+        :param exp_list(list): a sample list from the DataFrame
+        :return: float(Negative ratio of samples)
+        """
         ctr_neg = 0
         for exp in exp_list:
             if exp[1] < 0:
@@ -48,6 +72,11 @@ class Evaluator():
         return float(ctr_neg / len(exp_list))
 
     def lime_sum_pos(self, exp_list):
+        """
+        Sum all of the positive explanation scores in the list.
+        :param exp_list(list): a sample list from the DataFrame
+        :return: float(Sum of positive scores)
+        """
         s_pos = 0.0
         for exp in exp_list:
             if exp[1] >= 0:
@@ -56,6 +85,11 @@ class Evaluator():
         return s_pos
 
     def lime_sum_neg(self, exp_list):
+        """
+        Sum all of the negative explanation scores in the list.
+        :param exp_list(list): a sample list from the DataFrame
+        :return: float(Sum of negative scores)
+        """
         s_neg = 0.0
         for exp in exp_list:
             if exp[1] < 0:
@@ -64,6 +98,11 @@ class Evaluator():
         return s_neg
 
     def lime_extract_explainer_stats(self, df):
+        """
+        Estimate the LIME explainer metrics with lambda functions and append them to the DataFrame.
+        :param df(pd.DataFrame): original prediction DataFrame
+        :return: df(The processed DataFrame)
+        """
         df["Letter_Length"] = df["Text"].apply(lambda x: len(x))
         df["Pos_ratio"] = df["Explanations"].apply(lambda x: self.lime_count_pos(x))
         df["Neg_ratio"] = df["Explanations"].apply(lambda x: self.lime_count_neg(x))
@@ -76,7 +115,12 @@ class Evaluator():
         return df
 
     def sr_eval_predictions(self, df, top=5):
-        sentence_scores = []
+        """
+        Run the evaluation on the Sentence Rankings.
+        :param df(pd.DataFrame): DataFrame containing the predictions.
+        :param top(int): Number of sentences to rank.
+        :return: df(The processed DataFrame with top positive/negative sentence scores)
+        """
         reverse_word_map = dict(map(reversed, self.predictor.tokenizer.word_index.items()))
         stop_words = set(nltk.corpus.stopwords.words('english'))
         word_dicts = []
@@ -134,6 +178,11 @@ class Evaluator():
         return df
 
     def sr_get_length(self, pos_dict):
+        """
+        Get the total sum of sentence lengths per example (positive or negative).
+        :param pos_dict(dict): the dictionary of ranked sentences
+        :return: s_lengths(int)
+        """
         s_lengths = 0
         for k in pos_dict.keys():
             s_lengths += len(k)
@@ -141,6 +190,11 @@ class Evaluator():
         return s_lengths
 
     def sr_get_score_sum(self, pos_dict):
+        """
+        Get the total sum of sentence scores per example (positive or negative).
+        :param pos_dict(dict): the dictionary of ranked sentences
+        :return: s_sum(int)
+        """
         s_sum = 0.0
         for v in pos_dict.values():
             s_sum += v
@@ -148,6 +202,11 @@ class Evaluator():
         return s_sum
 
     def sr_extract_stats(self, eval_df):
+        """
+        Get the sentence ranking metrics using lambda functions and append them to the DataFrame.
+        :param eval_df(pd.DataFrame): DataFrame containing the predictions + the LIME explainer metrics
+        :return: eval_df(pd.DataFrame: the full evaluation DataFrame)
+        """
         eval_df['Top_Pos_Sent_length'] = eval_df['S_Top_Pos_Ranks'].apply(lambda x: self.sr_get_length(x))
         eval_df['Top_Neg_Sent_length'] = eval_df['S_Top_Neg_Ranks'].apply(lambda x: self.sr_get_length(x))
         eval_df['Top_Pos_Sent_Score_Sum'] = eval_df['S_Top_Pos_Ranks'].apply(lambda x: self.sr_get_score_sum(x))

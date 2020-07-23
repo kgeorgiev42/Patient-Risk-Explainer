@@ -88,6 +88,11 @@ contraction_mapping = {"ain't": "is not", "aren't": "are not", "can't": "cannot"
 
 
 def clean_text(text):
+    """
+    Cleans the letter from quotes and punctuations, whilst retaining the full stop.
+    :param text(str): raw discharge letter
+    :return: text(str)
+    """
     text = re.sub("'", "", text)
     text = text.replace('.', 'PLACEHOLDER')
     text = re.sub("(\\W)+", " ", text)
@@ -96,11 +101,23 @@ def clean_text(text):
 
 
 def tokenize(text):
+    """
+    Tokenizes the cleaned version of the letter, per sentence.
+    :param text(str): the cleaned text
+    :return: sent_text(list)
+    """
     sent_text = nltk.sent_tokenize(text)
     return sent_text
 
 
 def filter_text(text, low=10, high=512):
+    """
+    Removes exceedingly short or long sentences with a fixed threshold.
+    :param text(str): the tokenized list of sentences
+    :param low(int): lower-bound sentence length
+    :param high(int): upper-bound sentence length
+    :return: filtered(list)
+    """
     filtered = []
     for t in text:
         if len(t) > low and len(t) <= high:
@@ -117,6 +134,12 @@ def filter_text(text, low=10, high=512):
 
 
 def preprocess_letter(file_path):
+    """
+    Performs the preprocessing pipeline defined from the previous functions.
+    Loads the letter from the specified path and returns both the preprocessed and raw versions.
+    :param file_path(str): letter path
+    :return: prep_letter(str: Preprocessed version), raw_letter(str: Raw version)
+    """
     if not os.path.isfile(file_path):
         logging.error('Input file not found.')
 

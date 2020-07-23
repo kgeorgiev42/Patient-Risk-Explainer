@@ -15,9 +15,14 @@ from lime import lime_text, submodular_pick
 
 
 class BaseExplainer():
-    '''
+    """
     Base Explainer module, initialized with the model file, tokenizer and class names.
-    '''
+
+    Params:
+        tokenizer(list): the Keras tokenizer created from the respective dataset.
+        clf(tf.Model): the tf.Keras model object
+        class_names(list): list of positive/negative class labels
+    """
 
     def __init__(self, tokenizer, clf, class_names):
         self.tokenizer = tokenizer
@@ -26,32 +31,45 @@ class BaseExplainer():
 
     def remove_stopwords(self, words):
         """
-        Function to remove stopwords from the question text
+        Function to remove stopwords from the letter text.
+        :param words(list): list of valid sentences.
+        :return: (list: the filtered sentences)
         """
         stop_words = set(nltk.corpus.stopwords.words("english"))
         return [word for word in words if word not in stop_words]
 
     def remove_punctuation(self, text):
         """
-        Function to remove punctuation from the question text
+        Function to remove punctuation from the letter text.
+        :param text(str): raw text
+        :return: (str: text without punctuation)
         """
         return re.sub(r'[^\w\s]', '', text)
 
     def lemmatize_text(self, words):
         """
-        Function to lemmatize the question text
+        Function to lemmatize the letter text.
+        :param words(list): list of valid sentences.
+        :return: (list: sentences with lemmatized words)
         """
         lemmatizer = nltk.stem.WordNetLemmatizer()
         return [lemmatizer.lemmatize(word) for word in words]
 
     def stem_text(self, words):
         """
-        Function to stem the question text
+        Function to stem the letter text.
+        :param words(list): list of valid sentences.
+        :return: (list: sentences with stemmed words)
         """
         ps = nltk.stem.PorterStemmer()
         return [ps.stem(word) for word in words]
 
     def clean_numbers(self, x):
+        """
+        Replace numbers with '#' sign and add whitespaces.
+        :param x(str): raw text
+        :return: x(str: processed string)
+        """
         x = re.sub('[0-9]{5,}', ' ##### ', x)
         x = re.sub('[0-9]{4}', ' #### ', x)
         x = re.sub('[0-9]{3}', ' ### ', x)
@@ -59,18 +77,33 @@ class BaseExplainer():
         return x
 
     def punct_add_space(self, x, puncts):
+        """
+        Add whitespaces in between punctuation signs.
+        :param x(str): raw text
+        :return: x(str: processed string)
+        """
         x = str(x)
         for punct in puncts:
             x = x.replace(punct, f' {punct} ')
         return x
 
     def odd_add_space(self, x, odd_chars):
+        """
+        Add whitespaces in between odd characters.
+        :param x(str): raw text
+        :return: x(str: processed string)
+        """
         x = str(x)
         for odd in odd_chars:
             x = x.replace(odd, f' {odd} ')
         return x
 
     def clean_contractions(self, text, mapping):
+        """
+        Replace contractions within the letter text with the split terms (e.g aren't -> are not).
+        :param x(str): raw text
+        :return: x(str: processed string)
+        """
         specials = ["’", "‘", "´", "`"]
         for s in specials:
             text = text.replace(s, "'")
@@ -78,6 +111,14 @@ class BaseExplainer():
         return text
 
     def preprocess_set(self, data, puncts, odd_chars, contraction_mapping):
+        """
+        Perform the preprocessing steps on the letter text and split the valid sentences in a list.
+        :param data(list): the list of pre-split sentences
+        :param puncts(list): list of valid punctuation symbols
+        :param odd_chars(list): list of odd characters
+        :param contraction_mapping(list): list of contractions
+        :return: letters(list: processed sentences)
+        """
         letters = []
         for i in tqdm(range(len(data))):
             sent_str = ' '.join(data[i])
@@ -95,23 +136,23 @@ class BaseExplainer():
         return letters
 
     def seq_prediction(self, classifier, tokenizer):
-        '''
+        """
         Prediction method to be inherited by each model.
-        '''
+        """
         pass
 
     def seq_explain(self, sentences, top_labels=1, sample_size=5000, num_features=20):
-        '''
+        """
         Explanation method to be inherited by each model.
-        '''
+        """
         pass
 
     def save_as_html(self, exp, path):
-        '''
+        """
         Save the explanation to an HTML file so it's easy to view.
-        You can also get it to other formats: as_list(), as_map(), etc.
-        See https://lime-ml.readthedocs.io/en/latest/lime.html#lime.explanation.Explanation
-        '''
+        :param exp(dict): sequence map of explanations
+        :param path(str): path to generate the HTML file in.
+        """
         try:
             os.makedirs('/'.join(path.split('/')[:-1]))
         except:
@@ -121,12 +162,16 @@ class BaseExplainer():
 
 
 class Explainer(BaseExplainer):
-    '''
-    1D-CNN explanation module for LIME. Includes perturbation analysis, sentence splitting and
-    ranking.
-    sample_size - number of samples to perturb
-    num_features - number of words/sentences to score
-    '''
+    """
+    Main explanation module class with LIME, SP-LIME and Sentence Ranking implementations.
+
+    Params:
+        tokenizer(list): the Keras tokenizer created from the respective dataset.
+        clf(tf.Model): the tf.Keras model object
+        class_names(list): list of positive/negative class labels
+        predictor(modules.Predictor): predictor class
+        threshold(int): decision threshold for positive/negative classes [1-10]
+    """
 
     def __init__(self, tokenizer, clf, class_names, predictor, threshold):
         super().__init__(tokenizer, clf, class_names)
@@ -134,11 +179,16 @@ class Explainer(BaseExplainer):
         self.threshold = threshold
 
     def seq_explain(self, sentences, top_labels=1, sample_size=5000, num_features=20):
-        '''
+        """
         Runs the LIME explainer using N-grams. Modified version includes sentence perturbation.
         Returns the mapping of useful words/clauses.
-        '''
-        # pre_letter = '\n'.join(sentences)
+        :param sentences(list): letter split into sentences and preprocessed
+        :param top_labels(int): number of classes to rank in LIME
+        :param sample_size(int): number of samples to perturb per instance
+        :param num_features(int): number of features to score per sample
+
+        :return exp(dict: LIME explanation sequence map), list(LIME explanation sequence as a list)
+        """
         explainer = lime.lime_text.LimeTextExplainer(
             bow=False,
             class_names=self.predictor.class_names
@@ -153,6 +203,15 @@ class Explainer(BaseExplainer):
         return exp, exp.as_list()
 
     def seq_explain_global(self, letters, sample_size=2, num_features=6, num_exps_desired=2):
+        """
+        Extracts the most representative explanations for a set of letters using SP-LIME.
+        :param sentences(list): letter split into sentences and preprocessed
+        :param top_labels(int): number of classes to rank in LIME
+        :param sample_size(int): number of samples to perturb per instance
+        :param num_features(int): number of features to score per sample
+
+        :return: sp_obj(Submodular Pick Object: contains the explanations for each instance)
+        """
         explainer = lime.lime_text.LimeTextExplainer(
             bow=False,
             class_names=self.predictor.class_names
@@ -166,9 +225,13 @@ class Explainer(BaseExplainer):
         return sp_obj.sp_explanations
 
     def split_sentences(self, letter, min_len=30):
-        '''
+        """
         Word tokenizing function for the ranking module.
-        '''
+        :param letter(str): preprocessed letter text
+        :param min_len(int): filter out sentences under this threshold
+
+        :return: filtered_sentences(list): list of valid sentences for Sentence Ranking.
+        """
         # separate sentences in new lines and strip extra whitespace
         letter_pre = self.strip_formatting(letter)
         letter_pre = re.sub(' +', ' ', letter_pre)
@@ -185,12 +248,19 @@ class Explainer(BaseExplainer):
         return filtered_sentences
 
     def rank_sentences(self, sentences, seq_map, true_cls=None, top=5):
-        '''
+        """
         Sentence ranking module.
         Retrieves the word weights from the LIME explainer and normalizes them using z-score [-1, 1].
         Afterwards, the word dictionary is used to (naively) sum up the scores for each sentence, by
         the occuring words and their weights.
-        '''
+
+        :param sentences(list): list of preprocessed letters to predict
+        :param seq_map(dict): explanation sequence map
+        :param true_cls(str): for labelling the ground truth of the examples
+        :parm top(int): number of sentences to rank (both positive and negative)
+
+        :return: sorted_neg_sent(dict: map of negative sentences/scores), sorted_pos_sent(dict: map of positive sentences/scores)
+        """
         prob_scores = self.predictor.seq_predict(sentences)
         prob_mean = mean([prob_scores[i][1] for i in range(len(prob_scores))])
 

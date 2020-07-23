@@ -3,7 +3,6 @@ import os
 import pickle
 
 import boto3
-import numpy as np
 import yaml
 from tensorflow.keras import models
 
@@ -17,8 +16,13 @@ bucket = s3_resource.Bucket(AWS_BUCKET_NAME)
 
 class ExplainerController():
     """
-    XAI module controller template.
-
+    Controller class for pulling the model and data files from S3.
+    Loads the config.yml file with the specified paths.
+    Params:
+        model_type(str) - Fasttext or 1D-CNN
+        task(str) - Risk of Death/Risk of Hospital Readmission
+        model_config(str) - path to model config.yml file
+        data_config(str) - path to data config.yml file
     """
 
     def __init__(self, model_type, task, model_config, data_config):
@@ -28,11 +32,20 @@ class ExplainerController():
         self.data_config = self._load_config(data_config)
 
     def _load_config(self, config_path):
+        """
+        Config loader function.
+        :param config_path(str): path to config file
+        :return: (data: the config file as a dictionary)
+        """
         with open(config_path) as f:
             data = yaml.load(f, Loader=yaml.FullLoader)
             return data
 
     def download_model_files(self):
+        """
+        Pull the model files (pickles, tf models) from S3.
+        :return:
+        """
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
@@ -64,6 +77,12 @@ class ExplainerController():
         logging.info('Model download successful.')
 
     def load_model_files(self):
+        """
+        Loads the downloaded files into memory.
+        The Keras model gets loaded in standard TF format, the tokenizer and risk groups
+        are loaded lists from pickle files.
+        :return: model(tf.Model), tokenizer(list), risk_grps(list)
+        """
         if self.model_type not in ['fasttext', '1d_cnn']:
             logging.error('Model type not supported.')
             return
