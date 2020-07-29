@@ -82,7 +82,7 @@ def home():
             top_negative_score = full_df.iloc[0].Explanations[i][1]
             break
 
-    full_df.to_csv('samples/sample_df.csv')
+    #full_df.to_csv('samples/sample_df.csv')
     logging.info('Explanation complete.. generating results.')
 
     conf_score = float(full_df.iloc[0].Confidence) if float(full_df.iloc[0].Confidence) >= 0.5 else (1 - float(full_df.iloc[0].Confidence))
