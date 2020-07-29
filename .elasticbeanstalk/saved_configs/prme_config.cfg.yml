@@ -1,10 +1,12 @@
-AWSConfigurationTemplateVersion: 1.1.0.0
+AWSConfigurationTemplateVersion: 1.2.0.0
 OptionSettings:
+  aws:elasticbeanstalk:environment:
+    EnvironmentType: SingleInstance
   aws:autoscaling:launchconfiguration:
     IamInstanceProfile: aws-eb-role-full
   aws:ec2:instances:
     EnableSpot: true
-    InstanceTypes: 't2.micro, t3.micro'
+    InstanceTypes: 'g3s.xlarge, p3.2xlarge'
 CName: prme-main
 EnvironmentTier:
   Type: Standard

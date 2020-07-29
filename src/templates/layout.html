@@ -102,6 +102,7 @@
      $("#load_example").click(function () {
          var rawFile = new XMLHttpRequest();
         rawFile.open("GET", "static/sample_letter.txt", false);
+
         rawFile.onreadystatechange = function ()
         {
             if(rawFile.readyState === 4)
@@ -111,6 +112,7 @@
                     var allText = rawFile.responseText;
                     $('#custom-file-label').text("sample_letter.txt");
                     $('#md-form-text').text(allText);
+                    localStorage.setItem("raw_letter", allText);
                 }
             }
         }

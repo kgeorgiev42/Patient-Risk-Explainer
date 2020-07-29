@@ -18,7 +18,10 @@ logger.addHandler(handler)
 @bp.route('/')
 @bp.route('/home', methods=['GET', 'POST'])
 def home():
-    """Renders the home page."""
+    """Renders the home page.
+    Gets the input model parameters from the forms and runs the predictions with the selected config.
+    Returns the results (statistics, explanation highlights) in a JSON format, processed by AJAX.
+    """
     if request.method == 'GET':
         return render_template(
             'index.html',
@@ -55,6 +58,7 @@ def home():
     letter_pred_dict = predictor.extract_set_preds([prep_letter])
     letter_df = predictor.preds_to_df(letter_pred_dict, raw_letter)
 
+
     #### 5. Evaluate with LIME and Sentence Ranking
     evaluator = Evaluator(explainer, predictor, letter_df)
     lime_df = evaluator.lime_eval_predictions()
@@ -78,11 +82,13 @@ def home():
             top_negative_score = full_df.iloc[0].Explanations[i][1]
             break
 
+    #full_df.to_csv('samples/sample_df.csv')
     logging.info('Explanation complete.. generating results.')
 
+    conf_score = float(full_df.iloc[0].Confidence) if float(full_df.iloc[0].Confidence) >= 0.5 else (1 - float(full_df.iloc[0].Confidence))
     session['risk_score'] = str(full_df.iloc[0].Risk)
     session['risk_per'] = str(round(full_df.iloc[0].Risk_per * 100, 2))
-    session['risk_conf'] = str(round(float(full_df.iloc[0].Confidence) * 100, 2))
+    session['risk_conf'] = str(round(conf_score * 100, 2))
     session['m_exp_score'] = str(round(full_df.iloc[0].Mean_exp_score, 4))
     session['m_sent_r_score'] = str(round(full_df.iloc[0].Mean_Rank_Sent_Score, 4))
     session['t_pos_exp'] = str(top_positive)
@@ -109,9 +115,8 @@ def home():
 
 @bp.route('/explain')
 def explain():
-    """Renders the home page."""
+    """Renders the explanation page manually (for inference)."""
     return render_template(
         'explain.html',
         year=datetime.now().year,
     )
-
