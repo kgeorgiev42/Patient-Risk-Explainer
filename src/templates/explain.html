@@ -518,7 +518,7 @@ input:checked + .slider:before {
         var pos_keywords = [];
         var neg_keywords = [];
 
-        // $('#md-form-text').text(localStorage.getItem("raw_letter"));
+        $('#md-form-text').text(localStorage.getItem("raw_letter"));
         to_rep = localStorage.getItem("raw_letter").replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;');
 
         to_rep = to_rep.replace(/\n+/g, '\n');
