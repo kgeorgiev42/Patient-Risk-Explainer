@@ -12,4 +12,4 @@ except ValueError:
     PORT = 5000
 '''
 application = create_app(os.getenv('FLASK_ENV') or 'default')
-application.run(host='0.0.0.0', port=8080, debug=False)
+application.run(host='0.0.0.0', port=5000, debug=False)
