@@ -1,5 +1,5 @@
 import nltk
-
+import en_core_sci_md
 nltk.download('punkt')
 
 import re
@@ -106,8 +106,10 @@ def tokenize(text):
     :param text(str): the cleaned text
     :return: sent_text(list)
     """
-    sent_text = nltk.sent_tokenize(text)
-    return sent_text
+    #sent_text = nltk.sent_tokenize(text)
+    nlp_sentencizer = en_core_sci_md.load()
+    sent_text = nlp_sentencizer(text)
+    return list(sent_text.sents)
 
 
 def filter_text(text, low=10, high=512):
@@ -120,15 +122,15 @@ def filter_text(text, low=10, high=512):
     """
     filtered = []
     for t in text:
-        if len(t) > low and len(t) <= high:
+        if len(str(t)) > low and len(str(t)) <= high:
             fl = False
-            tmp_str = t.split(' ')
+            tmp_str = str(t).split(' ')
             for s in tmp_str:
                 if s.replace('.', '', 1).isdigit():
                     fl = True
                     break
             if not fl:
-                filtered.append(t)
+                filtered.append(str(t))
 
     return filtered
 
