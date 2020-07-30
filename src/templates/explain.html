@@ -571,7 +571,7 @@ input:checked + .slider:before {
         for (var sent in pos_keywords){
             sent_list = pos_keywords[sent][0].split('<br/>');
             for (var sent_split in sent_list){
-                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 15) {
                     sent_split_split = sent_list[sent_split].split(" ")
                     if (pos_keywords[sent][1] < 0.005) {
                         pos_keywords_proc_1.push(sent_list[sent_split]);
@@ -595,7 +595,7 @@ input:checked + .slider:before {
         for (var sent in neg_keywords){
             sent_list = neg_keywords[sent][0].split('<br/>');
             for (var sent_split in sent_list){
-                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 15) {
                     sent_split_split = sent_list[sent_split].split(" ")
                     if (neg_keywords[sent][1] > -0.005) {
                         neg_keywords_proc_1.push(sent_list[sent_split]);
@@ -649,7 +649,7 @@ input:checked + .slider:before {
             if(explanations[example][0].length >= 100){
                 exp_labels.push(explanations[example][0].slice(0, 93) + "...")
             }
-            else {
+            else if (explanations[example][0].length > 15){
                 exp_labels.push(explanations[example][0])
             }
 
