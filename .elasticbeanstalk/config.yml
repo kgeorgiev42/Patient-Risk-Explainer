@@ -1,0 +1,19 @@
+branch-defaults:
+  deploy:
+    environment: prme-env-app
+environment-defaults:
+  prme-env-app:
+    branch: null
+    repository: null
+global:
+  application_name: prme-app
+  default_ec2_keyname: null
+  default_platform: Docker
+  default_region: eu-west-2
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: git
+  workspace_type: Application
