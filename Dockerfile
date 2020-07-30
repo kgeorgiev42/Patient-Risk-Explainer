@@ -5,7 +5,7 @@ FROM python:3.7
 # This keeps Python from buffering stdin/stdout
 # ENV PYTHONUNBUFFERED 1
 
-MAINTAINER Konstantin Georgiev "dragonflareful@gmail.com"
+MAINTAINER Konstantin S. Georgiev "dragonflareful@gmail.com"
 
 # install system dependencies
 RUN apt-get update \
