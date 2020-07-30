@@ -1,10 +1,12 @@
 import nltk
-
+import en_core_sci_md
 nltk.download('punkt')
+from spacy.attrs import ORTH, LEMMA
 
 import re
 import os
 import logging
+
 
 puncts = ['☹', 'Ź', 'Ż', 'ἰ', 'ή', 'Š', '＞', 'ξ', 'ฉ', 'ั', 'น', 'จ', 'ะ', 'ท', 'ำ', 'ใ', 'ห', '้', 'ด', 'ี', '่', 'ส',
           'ุ', 'Π', 'प', 'ऊ', 'Ö', 'خ', 'ب', 'ஜ', 'ோ', 'ட', '「', 'ẽ', '½', '△', 'É', 'ķ', 'ï', '¿', 'ł', '북', '한', '¼',
@@ -88,35 +90,66 @@ contraction_mapping = {"ain't": "is not", "aren't": "are not", "can't": "cannot"
 
 
 def clean_text(text):
+    """
+    Cleans the letter from quotes and punctuations, whilst retaining the full stop.
+    :param text(str): raw discharge letter
+    :return: text(str)
+    """
     text = re.sub("'", "", text)
+    ### cut spaces before full-stop
+    text = re.sub(r'\s+([?.!"])', r'\1', text)
     text = text.replace('.', 'PLACEHOLDER')
     text = re.sub("(\\W)+", " ", text)
     text = text.replace('PLACEHOLDER', '.')
+
     return text
 
 
 def tokenize(text):
+    """
+    Tokenizes the cleaned version of the letter, per sentence.
+    :param text(str): the cleaned text
+    :return: sent_text(list)
+    """
     sent_text = nltk.sent_tokenize(text)
+    #nlp_sentencizer = en_core_sci_md.load()
+    # MIMIC special cases
+    #nlp_sentencizer.tokenizer.add_special_case('Dr.', [{ORTH: 'Dr', LEMMA: 'Doctor'}])
+    #nlp_sentencizer.tokenizer.add_special_case('St.', [{ORTH: 'St', LEMMA: 'Saint'}])
+    #sent_text = nlp_sentencizer(text)
     return sent_text
 
 
 def filter_text(text, low=10, high=512):
+    """
+    Removes exceedingly short or long sentences with a fixed threshold.
+    :param text(str): the tokenized list of sentences
+    :param low(int): lower-bound sentence length
+    :param high(int): upper-bound sentence length
+    :return: filtered(list)
+    """
     filtered = []
     for t in text:
-        if len(t) > low and len(t) <= high:
+        if len(str(t)) > low and len(str(t)) <= high:
             fl = False
-            tmp_str = t.split(' ')
+            tmp_str = str(t).split(' ')
             for s in tmp_str:
                 if s.replace('.', '', 1).isdigit():
                     fl = True
                     break
             if not fl:
-                filtered.append(t)
+                filtered.append(str(t))
 
     return filtered
 
 
 def preprocess_letter(file_path):
+    """
+    Performs the preprocessing pipeline defined from the previous functions.
+    Loads the letter from the specified path and returns both the preprocessed and raw versions.
+    :param file_path(str): letter path
+    :return: prep_letter(str: Preprocessed version), raw_letter(str: Raw version)
+    """
     if not os.path.isfile(file_path):
         logging.error('Input file not found.')
 
