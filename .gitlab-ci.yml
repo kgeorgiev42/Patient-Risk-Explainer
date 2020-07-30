@@ -42,7 +42,7 @@ deploy:
     - python --version
     - echo "Deploying Flask application"
     - echo "FLASK_APP=application.py"
-    - /root/.local/bin/eb deploy prme-env
+    # - /root/.local/bin/eb deploy prme-env
   environment:
     name: prod
   only:

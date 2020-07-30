@@ -649,7 +649,7 @@ input:checked + .slider:before {
             if(explanations[example][0].length >= 100){
                 exp_labels.push(explanations[example][0].slice(0, 93) + "...")
             }
-            else {
+            else if (explanations[example][0].length > 15){
                 exp_labels.push(explanations[example][0])
             }
 
