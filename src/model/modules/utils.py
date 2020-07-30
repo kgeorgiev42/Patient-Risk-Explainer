@@ -1,10 +1,12 @@
 import nltk
 import en_core_sci_md
 nltk.download('punkt')
+from spacy.attrs import ORTH, LEMMA
 
 import re
 import os
 import logging
+
 
 puncts = ['☹', 'Ź', 'Ż', 'ἰ', 'ή', 'Š', '＞', 'ξ', 'ฉ', 'ั', 'น', 'จ', 'ะ', 'ท', 'ำ', 'ใ', 'ห', '้', 'ด', 'ี', '่', 'ส',
           'ุ', 'Π', 'प', 'ऊ', 'Ö', 'خ', 'ب', 'ஜ', 'ோ', 'ட', '「', 'ẽ', '½', '△', 'É', 'ķ', 'ï', '¿', 'ł', '북', '한', '¼',
@@ -94,9 +96,12 @@ def clean_text(text):
     :return: text(str)
     """
     text = re.sub("'", "", text)
+    ### cut spaces before full-stop
+    text = re.sub(r'\s+([?.!"])', r'\1', text)
     text = text.replace('.', 'PLACEHOLDER')
     text = re.sub("(\\W)+", " ", text)
     text = text.replace('PLACEHOLDER', '.')
+
     return text
 
 
@@ -106,10 +111,13 @@ def tokenize(text):
     :param text(str): the cleaned text
     :return: sent_text(list)
     """
-    #sent_text = nltk.sent_tokenize(text)
-    nlp_sentencizer = en_core_sci_md.load()
-    sent_text = nlp_sentencizer(text)
-    return list(sent_text.sents)
+    sent_text = nltk.sent_tokenize(text)
+    #nlp_sentencizer = en_core_sci_md.load()
+    # MIMIC special cases
+    #nlp_sentencizer.tokenizer.add_special_case('Dr.', [{ORTH: 'Dr', LEMMA: 'Doctor'}])
+    #nlp_sentencizer.tokenizer.add_special_case('St.', [{ORTH: 'St', LEMMA: 'Saint'}])
+    #sent_text = nlp_sentencizer(text)
+    return sent_text
 
 
 def filter_text(text, low=10, high=512):
