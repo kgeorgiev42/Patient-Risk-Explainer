@@ -15,6 +15,23 @@
         {% endif %}
         {% endwith %}
     </div>
+    <div class="row">
+        <h1 class="mt-5">About the app</h1>
+    </div>
+    <div class="row">
+        <p class="lead">A LIME-based explainer for interpreting risk factors in patient discharge letters. Includes modules for sentence ranking and highlighting, alongside other statistics regarding the accumulated results. Allows the user to upload a discharge letter (as a .txt file) and generate an explanation for it, as well as select the model configuration.<br><b>Purpose of the system</b><br>This app is meant to serve as an assistant tool for clinicians who monitor and perform patient EHR readings. It aims to minimize the time spent on the reading, in order to reach a conclusion regarding the patient's condition and the required intervention, as a result. It can also be beneficial to health surveillance systems for filtering and diagnosing high-risk patients within a large number of records.<br><b>Functionality</b><br>The app currently supports two functioning models, implemented in Keras(TF2):</p>
+            <ul style="width:100%"><li><b>Fasttext (AUC: 0.85)</b></li>
+            <li><b>1D-Conv-LSTM (AUC: 0.87)</b></li></ul>
+        <br><p class="lead">The tasks supported by the explainer are:</p>
+            <ul style="width:100%">
+            <li><b>Risk of death within 1 year</b></li>
+            <li><b>Risk of hospital readmission within 30 days</b></li>
+            </ul>
+            <br><p class="lead">You can also customize the model decision boundary for positive and negative classes, which affects the risk score ([1-10]). To begin, import a letter below or click <b>Load Example</b> to load a template.
+        <br><br><br><br><br></p>
+
+
+    </div>
      <form action="" method="post" role="form" id="upload-form" enctype="multipart/form-data">
          <div class="row">
                 <div class="form-group col-md-3 text-center">
@@ -140,6 +157,7 @@
      </form>
 
 </div>
+
 
 
 
