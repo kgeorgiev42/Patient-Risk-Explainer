@@ -517,6 +517,7 @@ input:checked + .slider:before {
 
         var pos_keywords = [];
         var neg_keywords = [];
+        var abbreviations = ['Mr', 'Mrs', 'Dr', 'Sr', 'St', 'Pt'];
 
         $('#md-form-text').text(localStorage.getItem("raw_letter"));
         to_rep = localStorage.getItem("raw_letter").replace(/\t/g,'&nbsp;&nbsp;&nbsp;&nbsp;');
@@ -535,11 +536,17 @@ input:checked + .slider:before {
         for (var exp in explanations) {
             var max_sim = 0.0
             best_sent = ""
-            for (var raw_sent in list_letter_sents) {
-                sim = Cosinesimilarity(explanations[exp][0], list_letter_sents[raw_sent]);
+            for (i=0; i<list_letter_sents.length; i++) {
+                sim = Cosinesimilarity(explanations[exp][0], list_letter_sents[i]);
                 if(sim > max_sim) {
                     max_sim = sim;
-                    best_sent = list_letter_sents[raw_sent];
+                    letter_split = list_letter_sents[i].split(" ")
+                    if (abbreviations.includes(letter_split[letter_split.length - 1]) && list_letter_sents[i + 1].length>0){
+                        best_sent = list_letter_sents[i].concat("." + list_letter_sents[i + 1]);
+                    }
+                    else if(list_letter_sents[i].length>0){
+                        best_sent = list_letter_sents[i];
+                    }
                 }
             }
             var format = /[ `!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
@@ -571,6 +578,9 @@ input:checked + .slider:before {
         for (var sent in pos_keywords){
             sent_list = pos_keywords[sent][0].split('<br/>');
             for (var sent_split in sent_list){
+                if (sent_list[sent_split][sent_list[sent_split].length - 2] === ' ' && !(sent_list[sent_split][sent_list[sent_split].length - 1] === sent_list[sent_split][sent_list[sent_split].length - 1].toUpperCase())){
+                    continue;
+                }
                 if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 15) {
                     sent_split_split = sent_list[sent_split].split(" ")
                     if (pos_keywords[sent][1] < 0.005) {

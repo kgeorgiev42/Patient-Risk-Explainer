@@ -1,12 +1,13 @@
-import nltk
 import en_core_sci_md
-nltk.download('punkt')
+from nltk.tokenize.punkt import PunktSentenceTokenizer, PunktParameters
 from spacy.attrs import ORTH, LEMMA
 
 import re
 import os
 import logging
 
+punkt_param = PunktParameters()
+punkt_param.abbrev_types = {'dr', 'vs', 'mr', 'mrs', 'prof', 'inc', 'st'}
 
 puncts = ['☹', 'Ź', 'Ż', 'ἰ', 'ή', 'Š', '＞', 'ξ', 'ฉ', 'ั', 'น', 'จ', 'ะ', 'ท', 'ำ', 'ใ', 'ห', '้', 'ด', 'ี', '่', 'ส',
           'ุ', 'Π', 'प', 'ऊ', 'Ö', 'خ', 'ب', 'ஜ', 'ோ', 'ட', '「', 'ẽ', '½', '△', 'É', 'ķ', 'ï', '¿', 'ł', '북', '한', '¼',
@@ -111,12 +112,14 @@ def tokenize(text):
     :param text(str): the cleaned text
     :return: sent_text(list)
     """
-    sent_text = nltk.sent_tokenize(text)
+    tokenizer = PunktSentenceTokenizer(punkt_param)
+    sent_text = tokenizer.tokenize(text)
     #nlp_sentencizer = en_core_sci_md.load()
     # MIMIC special cases
     #nlp_sentencizer.tokenizer.add_special_case('Dr.', [{ORTH: 'Dr', LEMMA: 'Doctor'}])
     #nlp_sentencizer.tokenizer.add_special_case('St.', [{ORTH: 'St', LEMMA: 'Saint'}])
     #sent_text = nlp_sentencizer(text)
+    #return sent_text
     return sent_text
 
 
