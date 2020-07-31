@@ -123,15 +123,15 @@ class BaseExplainer():
         for i in tqdm(range(len(data))):
             sent_str = ' '.join(data[i])
             sent_str = self.clean_numbers(sent_str)
-            sent_str = self.punct_add_space(sent_str, puncts)
+            #sent_str = self.punct_add_space(sent_str, puncts)
             sent_str = self.odd_add_space(sent_str, odd_chars)
             sent_str = self.clean_contractions(sent_str, contraction_mapping)
-            sent_str_tokens = nltk.tokenize.word_tokenize(sent_str)
+            #sent_str_tokens = nltk.tokenize.word_tokenize(sent_str)
             # sent_str_tokens = self.remove_stopwords(sent_str_tokens)
             # sent_str_tokens = self.lemmatize_text(sent_str_tokens)
-            sent_str_post = ' '.join(sent_str_tokens)
+            #sent_str_post = ' '.join(sent_str_tokens)
             # sent_str_post = sent_str_post.replace('. ', '.\n')
-            letters.append(sent_str_post)
+            letters.append(sent_str)
 
         return letters
 
