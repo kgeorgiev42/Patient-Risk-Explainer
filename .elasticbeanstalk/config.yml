@@ -1,6 +1,6 @@
 branch-defaults:
   deploy:
-    environment: prme-env-app
+    environment: null
 environment-defaults:
   prme-env-app:
     branch: null
