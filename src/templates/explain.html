@@ -581,7 +581,7 @@ input:checked + .slider:before {
                 if (sent_list[sent_split][sent_list[sent_split].length - 2] === ' ' && !(sent_list[sent_split][sent_list[sent_split].length - 1] === sent_list[sent_split][sent_list[sent_split].length - 1].toUpperCase())){
                     continue;
                 }
-                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 15) {
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
                     sent_split_split = sent_list[sent_split].split(" ")
                     if (pos_keywords[sent][1] < 0.005) {
                         pos_keywords_proc_1.push(sent_list[sent_split]);
@@ -605,8 +605,8 @@ input:checked + .slider:before {
         for (var sent in neg_keywords){
             sent_list = neg_keywords[sent][0].split('<br/>');
             for (var sent_split in sent_list){
-                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 15) {
-                    sent_split_split = sent_list[sent_split].split(" ")
+                if (/^[a-zA-Z]/.test(sent_list[sent_split]) && sent_list[sent_split].length > 0) {
+
                     if (neg_keywords[sent][1] > -0.005) {
                         neg_keywords_proc_1.push(sent_list[sent_split]);
                     }
