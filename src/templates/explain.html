@@ -322,6 +322,13 @@ input:checked + .slider:before {
 
 <script type="text/javascript">
 
+    /*
+    Cosine Similarity between the explanations is used to map the plain text explanations
+    to the ones encoded in HTML tags, due to the textarea element constraints.
+    Code for calculating the Cosine Similarity of the explanations is adapted from:
+    https://medium.com/@sumn2u/string-similarity-comparision-in-js-with-examples-4bae35f13968
+     */
+
     function termFreqMap(str) {
         var words = str.split(' ');
         var termFreq = {};
@@ -380,7 +387,7 @@ input:checked + .slider:before {
     }
 
 
-
+    // Setup configuration for the highlighting function
     window.onload = function () {
         // Determine selected options
         var options_pos_1 = {
@@ -514,7 +521,7 @@ input:checked + .slider:before {
         };
 
 
-
+        // Convert to HTML format and ignore breaks for specified abbreviations.
         var pos_keywords = [];
         var neg_keywords = [];
         var abbreviations = ['Mr', 'Mrs', 'Dr', 'Sr', 'St', 'Pt'];
@@ -563,6 +570,7 @@ input:checked + .slider:before {
             }
         }
 
+        // Append the positive/negative segments into five separate weighting groups split by fixed thresholds.
         var pos_keywords_proc_1 = [];
         var pos_keywords_proc_2 = [];
         var pos_keywords_proc_3 = [];
@@ -627,7 +635,7 @@ input:checked + .slider:before {
         }
 
         // Remove previous marked elements and mark
-        // the new keyword inside the context
+        // the new keywords inside the context
         $("#md-div").unmark({
           done: function() {
             $("#md-div").mark(Array.from(pos_keywords_proc_1), options_pos_1);
@@ -654,6 +662,8 @@ input:checked + .slider:before {
             });
         */
         console.log(explanations)
+
+        // Create the sentence importance chart with custom colors.
         exp_labels = []; exp_values = []; exp_colors = []; exp_labels_full = [];
         for (var example in explanations) {
             if(explanations[example][0].length >= 100){
