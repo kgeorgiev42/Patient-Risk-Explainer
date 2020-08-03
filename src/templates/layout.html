@@ -58,6 +58,8 @@
 
 <!-- Custom scripts -->
 <script type="text/javascript">
+
+    // Read the patient letter and save it to the browser session for processing.
      function readLetter(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -81,6 +83,7 @@
          $('#load_text').css('visibility', 'hidden');
      });
 
+    // Validate the uploaded letter.
     $("#upload_file").change(function () {
         var ext = $('#upload_file').val().split('.').pop().toLowerCase();
         if ($.inArray(ext, ['txt']) === -1) {
@@ -91,6 +94,7 @@
         }
      });
 
+    // Return to initial state.
      $("#clear").click(function () {
          $('#custom-file-label').text('Choose file (.txt file required)');
          $('#md-form-text').text('');
@@ -99,6 +103,7 @@
          window.location.href='/home';
      })
 
+    // Load a sample clinical discharge letter as a template and save it in the browser session.
      $("#load_example").click(function () {
          var rawFile = new XMLHttpRequest();
         rawFile.open("GET", "static/sample_letter.txt", false);
@@ -120,6 +125,7 @@
 
      })
 
+    // Send the explanation query to the backend for processing and return the result in a new page.
     $("#upload-form").submit(function (e) {
         e.preventDefault(); // block the traditional submission of the form.
         if ($('#md-form-text').text().trim() !== "") {
@@ -132,7 +138,6 @@
             var form_data = new FormData($('#upload-form')[0]);
 
             // send ajax POST request to start background job
-
             $.ajax({
                 data: form_data,
                 type: 'POST',
