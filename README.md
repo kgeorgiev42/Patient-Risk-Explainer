@@ -40,7 +40,7 @@ The model/explainer frameworks (in the notebooks folder) were developed using [<
 ##### Instructions on running the system
 <b>1.</b> Clone the project from this repository to your local directory using:
 ```bash
-git clone https://gitlab.com/xai-clinical-text-analysis/patient-risk-model-explainer-ui.git 
+git clone https://github.com/JadeBlue96/Patient-Risk-Explainer.git
 ```
 <b>2.</b> Create a new conda environment to install the packages in:
 ```bash
