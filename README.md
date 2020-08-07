@@ -2,7 +2,7 @@
 
 #### A model-agnostic tool for explaining text-based risk classification predictions for patients in Intensive Care Units. 
 
-##### CS5917: MSc Project in Artificial Intelligence (Industrial Placement with RedStarAI)
+##### CS5917: MSc Project in Artificial Intelligence (Industrial Placement with the partnership of [RedStar](https://www.linkedin.com/company/red-star-ai/about/))
 
 A LIME-based explainer for interpreting risk factors in patient discharge letters. Includes modules for sentence ranking and highlighting, alongside other statistics regarding the accumulated results. Allows the user to upload a discharge letter (as a .txt file) and generate an explanation for it, as well as select the model configuration.
 
@@ -65,4 +65,3 @@ flask run
 ```bash
 python -m pytest --cov-report term-missing --cov=src tests/
 ```
-
