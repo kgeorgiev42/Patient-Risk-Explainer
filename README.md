@@ -1,6 +1,6 @@
 # Patient Risk Explainer
 
-#### A model-agnostic tool for explaining text-based classification predictions for patients in Intensive Care Units. 
+#### A model-agnostic tool for explaining text-based risk classification predictions for patients in Intensive Care Units. 
 
 ##### CS5917: MSc Project in Artificial Intelligence (Industrial Placement with RedStarAI)
 
