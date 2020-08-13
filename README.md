@@ -2,7 +2,7 @@
 
 #### A model-agnostic tool for explaining text-based risk classification predictions for patients in Intensive Care Units. 
 
-##### CS5917: MSc Project in Artificial Intelligence (Industrial Placement with the partnership of [RedStar](https://www.linkedin.com/company/red-star-ai/about/))
+##### University of Aberdeen CS5917: MSc Project in Artificial Intelligence (Industrial Placement with the partnership of [RedStar](https://www.linkedin.com/company/red-star-ai/about/))
 
 A LIME-based explainer for interpreting risk factors regarding possible clinical outcomes from patient discharge letters. Includes modules for sentence ranking and highlighting, alongside other statistics regarding the accumulated results. Allows the user to upload a discharge letter (as a .txt file) and generate an explanation for it, as well as select the model configuration.
 
@@ -44,7 +44,7 @@ The model/explainer frameworks (in the notebooks folder) were developed using [<
 ##### Instructions on running the system
 <b>1.</b> Clone the project from this repository to your local directory using:
 ```bash
-git clone https://gitlab.com/xai-clinical-text-analysis/patient-risk-model-explainer-ui.git 
+git clone https://github.com/JadeBlue96/Patient-Risk-Explainer.git
 ```
 <b>2.</b> Create a new conda environment to install the packages in:
 ```bash
