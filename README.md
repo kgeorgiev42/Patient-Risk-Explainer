@@ -4,7 +4,11 @@
 
 ##### CS5917: MSc Project in Artificial Intelligence (Industrial Placement with the partnership of [RedStar](https://www.linkedin.com/company/red-star-ai/about/))
 
-A LIME-based explainer for interpreting risk factors in patient discharge letters. Includes modules for sentence ranking and highlighting, alongside other statistics regarding the accumulated results. Allows the user to upload a discharge letter (as a .txt file) and generate an explanation for it, as well as select the model configuration.
+A LIME-based explainer for interpreting risk factors regarding possible clinical outcomes from patient discharge letters. Includes modules for sentence ranking and highlighting, alongside other statistics regarding the accumulated results. Allows the user to upload a discharge letter (as a .txt file) and generate an explanation for it, as well as select the model configuration.
+
+##### Purpose of the system
+
+This app is meant to serve as an assistant tool for clinicians who monitor and perform patient EHR readings. It aims to minimize the time spent on an EHR, in order to reach a conclusion regarding the patient's condition and the required intervention. As a result, this can also reduce the error rate of clinicians, who otherwise perform these readings manually on large volumes of text. Thus, It can be beneficial to health surveillance systems for filtering and diagnosing high-risk patients within a large number of records.<br>
 
 ##### Functionality
 The app currently supports two functioning models, implemented in <b>Keras(TF2)</b>:
